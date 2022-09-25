@@ -1,0 +1,16 @@
+import {BASE_URL, myAxios} from './helper'
+
+export const GetAllProducts=(pageNumber=0,pageSize=5)=>{
+    const url = BASE_URL+`products/?pageNumber=${pageNumber}&pageSize=${pageSize}`
+    return myAxios.get(url).then(response=>response.data)    
+}
+
+export const searchProduct=(key)=>{
+    const url = BASE_URL+`products/search?keyword=${key}`
+    return myAxios.get(url).then(response=>response.data)
+}
+
+export const GetProductById=(productId)=>{
+    const url= BASE_URL+`products/product/${productId}`
+    return myAxios.get(url).then(response=>response.data)
+}
