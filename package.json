@@ -1,7 +1,6 @@
 {
   "name": "multishop",
   "version": "0.1.0",
-  "homepage": "https://manish8285.github.io/multishop",
   "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
