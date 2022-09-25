@@ -8,7 +8,7 @@ import Cart from './pages/Cart';
 function App() {
   return (
     
-    <BrowserRouter basename={"/multishop"}>
+    <BrowserRouter basename={"/multishop/"}>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path="/product/:productId" element={<SingleProduct />} />
