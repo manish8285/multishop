@@ -17,7 +17,7 @@ const Product=({props})=>{
                                 </div>
                             </div>
                             <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" >{product.name}</a>
+                                <a class="h6 text-decoration-none mx-1" >{product.name}</a>
                                 <div class="d-flex align-items-center justify-content-center mt-2">
                                     <h5>Rs {product.price}</h5><h6 class="text-muted ml-2"><del>Rs {product.mrp}</del></h6>
                                 </div>
