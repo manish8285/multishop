@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { AddToCart, GetCart, SubstractFromCart } from "../services/cart-service"
-import { BASE_URL } from "../services/helper"
+import { BASE_URL, DRIVE_IMAGE_URL } from "../services/helper"
 import { GetProductById } from "../services/product-service"
 
 
@@ -32,7 +32,7 @@ const SingleProductComponent=()=>{
             <div class="col-lg-5 mb-30">
                 
                         
-                <img class="w-100 h-100" src={BASE_URL+"images/products/"+product.images[0]?.name} alt="Image"/>
+                <img class="w-100 h-100" src={DRIVE_IMAGE_URL+product.images[0]?.name} alt="Image"/>
                         
                
             </div>
@@ -103,7 +103,7 @@ const SingleProductComponent=()=>{
                             <h4 class="mb-3">More Images</h4>
                             {
                             product.images.map((img)=>(
-                                <img className={"img-fluid w-100"} key={img.id} src={BASE_URL+"images/products/"+img.name} alt="Image"/>
+                                <img className={"img-fluid w-100"} key={img.id} src={DRIVE_IMAGE_URL+img.name} alt="Image"/>
                                 ))
                             }
                         </div>

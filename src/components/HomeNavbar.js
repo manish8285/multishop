@@ -1,4 +1,7 @@
+import { NavLink, useNavigate } from "react-router-dom"
+
 const HomeNavbar=()=>{
+    var navigate = useNavigate()
     return(
            
      <div>
@@ -7,10 +10,9 @@ const HomeNavbar=()=>{
             <div class="row bg-secondary py-1 px-xl-5">
                 <div class="col-lg-6 d-none d-lg-block">
                     <div class="d-inline-flex align-items-center h-100">
-                        <a class="text-body mr-3" >About</a>
-                        <a class="text-body mr-3" >Contact</a>
-                        <a class="text-body mr-3" >Help</a>
-                        <a class="text-body mr-3" >FAQs</a>
+                        <a onClick={()=>navigate("/")} class="text-body mr-3" >Home</a>
+                        <a onClick={()=>navigate("/cart")} class="text-body mr-3" >Cart</a>
+                        <a class="text-body mr-3" >Contact Us</a>
                     </div>
                 </div>
                 <div class="col-lg-6 text-center text-lg-right">
@@ -54,7 +56,7 @@ const HomeNavbar=()=>{
 
             <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex manish-1">
                 <div class="col-lg-4">
-                    <a href="/" class="text-decoration-none">
+                    <a onClick={()=>navigate("/")} class="text-decoration-none">
                         <span class="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
                         <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
                     </a>
