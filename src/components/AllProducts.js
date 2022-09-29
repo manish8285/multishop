@@ -42,7 +42,7 @@ const AllProducts=()=>{
 
 
 
-    const changePage=(pageNumber=0,pageSize=5)=>{
+    const changePage=(pageNumber=0,pageSize=10)=>{
         GetAllProducts(pageNumber,pageSize).then(response=>{
             console.log(response)
             setPage(response)
