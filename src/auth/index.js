@@ -17,6 +17,7 @@ export const doLogin=(data,next)=>{
 
 export const doLogout=(next)=>{
     localStorage.removeItem("data")
+    
     next()
 }
 

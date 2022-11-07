@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { Table } from "reactstrap"
 import { AddToCart, GetCart, SubstractFromCart } from "../services/cart-service"
 import { BASE_URL, DRIVE_IMAGE_URL } from "../services/helper"
 import { GetProductById } from "../services/product-service"
@@ -17,6 +18,7 @@ const SingleProductComponent=()=>{
     const fetchProduct=()=>{
         GetProductById(productId).then((data)=>{
             setProduct(data);
+            console.log(product)
         }).catch((error)=>{
             console.log(error)
         })
@@ -90,8 +92,43 @@ const SingleProductComponent=()=>{
                 </div>
             </div>
         </div>
+        
         <div class="row px-xl-5">
+        
             <div class="col">
+            <div className="bg-light p-30 mb-2">
+                    <Table
+                    responsive
+                    >
+                        <tbody>
+                            <tr>
+                                <th>Product Name</th>
+                                <td>{product.name}</td>
+                            </tr>
+                            <tr>
+                                <th>Category</th>
+                                <td>{product.categoryId}</td>
+                            </tr>
+                            <tr>
+                                <th>Brand</th>
+                                <td>{product.brand}</td>
+                            </tr>
+                            <tr>
+                                <th>Origin</th>
+                                <td>{product.origin}</td>
+                            </tr>
+                            <tr>
+                                <th>SKU</th>
+                                <td>{product.rack}</td>
+                            </tr>
+                            <tr>
+                                <th>Available Units</th>
+                                <td>{product.quantity}</td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                </div>
+
                 <div class="bg-light p-30">
                     <div class="nav nav-tabs mb-4">
                         <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Images</a>

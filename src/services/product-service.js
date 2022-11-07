@@ -4,6 +4,10 @@ export const GetAllProducts=(pageNumber=0,pageSize=5)=>{
     const url = BASE_URL+`products/?pageNumber=${pageNumber}&pageSize=${pageSize}`
     return myAxios.get(url).then(response=>response.data)    
 }
+export const GetCategoryProducts=(categoryId,pageNumber=0,pageSize=5)=>{
+    const url =`products/category/products/?categoryId=${categoryId}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+    return myAxios.get(url).then(response=>response.data)    
+}
 
 export const searchProduct=(key)=>{
     const url = BASE_URL+`products/search?keyword=${key}`

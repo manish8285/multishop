@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Base from "../components/Base"
 import { AddToCart, GetCart, RemoveFromCart, SubstractFromCart } from "../services/cart-service"
-import { BASE_URL } from "../services/helper"
+import { BASE_URL, DRIVE_IMAGE_URL } from "../services/helper"
 import { Navigate, useNavigate } from "react-router-dom";
 
 const Cart=()=>{
@@ -29,6 +29,17 @@ const Cart=()=>{
 
     return (
         <Base>
+        <>
+        <div class="container-fluid mt-3">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" onClick={()=>navigate("/")} >Home</a>
+                    <a class="breadcrumb-item text-dark" >Cart</a>
+                </nav>
+            </div>
+        </div>
+    </div>
 
             <div class="container-fluid mt-2">
         <div class="row px-xl-5">
@@ -48,7 +59,7 @@ const Cart=()=>{
                             mycart.cartlist.map(item=>(
 
                                 <tr>
-                            <td class="align-middle"><img src={BASE_URL+"/images/products/"+item.product.images[0].name} alt="" style={{width: "50px"}} /> {item.product.name}</td>
+                            <td class="align-middle"><img src={DRIVE_IMAGE_URL+item.product.images[0].name} alt="product image" style={{width: "50px"}} /> {item.product.name}</td>
                             <td class="align-middle">{item.product.price}</td>
                             <td class="align-middle">
                                 <div class="input-group quantity mx-auto" style={{width: "100px"}}>
@@ -76,7 +87,7 @@ const Cart=()=>{
                     
                     
                 </table>
-                <button onClick={()=>navigate("/")} class="text-center btn btn-block btn-primary font-weight-bold my-3 py-3">Add more products</button>
+                <button onClick={()=>navigate("/")} class="text-center btn btn-block btn-primary font-weight-bold my-3 py-3">{(mycart.cartlist.length==0)?`You don't have any item in your cart. Add ?`:`Add More Item`}</button>
             </div>
             <div class="col-lg-4">
                 <form class="mb-30" action="">
@@ -104,12 +115,13 @@ const Cart=()=>{
                             <h5>Total</h5>
                             <h5>Rs{shipping+subtotal}</h5>
                         </div>
-                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                        <button onClick={()=>navigate("/checkout")} class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </>
         </Base>
         
     )

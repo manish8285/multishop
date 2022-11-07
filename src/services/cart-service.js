@@ -61,3 +61,7 @@ export const RemoveFromCart=(productId)=>{
      localStorage.setItem("mycart",JSON.stringify(mycart))
      window.dispatchEvent(new Event('cart'))
 }
+
+export const ClearCart=()=>{
+    localStorage.removeItem("mycart")
+}

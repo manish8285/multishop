@@ -1,8 +1,15 @@
 import { NavLink, useNavigate } from "react-router-dom"
+import { doLogout, getCurrentUserDetail, isLogedIn } from "../auth"
 
 const HomeNavbar=()=>{
     var navigate = useNavigate()
-    return(
+    const logOut=()=>{
+            doLogout(()=>{
+                isLogedIn();   
+            })
+            navigate("/")
+    }
+    return(  
            
      <div>
                   
@@ -12,43 +19,53 @@ const HomeNavbar=()=>{
                     <div class="d-inline-flex align-items-center h-100">
                         <a onClick={()=>navigate("/")} class="text-body mr-3" >Home</a>
                         <a onClick={()=>navigate("/cart")} class="text-body mr-3" >Cart</a>
-                        <a class="text-body mr-3" >Contact Us</a>
+                        <a onClick={()=>{navigate("/myorders")}} class="text-body mr-3" >My Orders</a>
                     </div>
                 </div>
                 <div class="col-lg-6 text-center text-lg-right">
                     <div class="d-inline-flex align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">Sign in</button>
-                                <button class="dropdown-item" type="button">Sign up</button>
-                            </div>
+                        {/* <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">{ isLogedIn()? getCurrentUserDetail().name : ('My Account')}</button> */}
+                            
+                                {
+                                
+                                isLogedIn() &&(
+                                <>
+                                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">{  getCurrentUserDetail().name}</button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                <button onClick={()=>{navigate("/myorders")}} class="dropdown-item" type="button">My Orders</button>
+                                <button onClick={()=>logOut()} class="dropdown-item" type="button">Logout</button>
+                                </div>
+                                </>
+                                )
+
+
+                                }
+                            
+                            
+                                {
+                                    !isLogedIn() && (
+                                        <>
+                                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">My Account</button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                        <button onClick={()=>navigate("/login")} class="dropdown-item" type="button">Sign in</button>
+                                        <button onClick={()=>navigate("/signup")} class="dropdown-item" type="button">Sign up</button>
+                                        </div>
+                                        </>
+                                    )
+                                }
+                            
                         </div>
-                        <div class="btn-group mx-2">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">EUR</button>
-                                <button class="dropdown-item" type="button">GBP</button>
-                                <button class="dropdown-item" type="button">CAD</button>
-                            </div>
-                        </div>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">EN</button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <button class="dropdown-item" type="button">FR</button>
-                                <button class="dropdown-item" type="button">AR</button>
-                                <button class="dropdown-item" type="button">RU</button>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="d-inline-flex align-items-center d-block d-lg-none">
                         <a  class="btn px-0 ml-2">
-                            <i class="fas fa-heart text-dark"></i>
-                            <span class="badge text-dark border border-dark rounded-circle" style={{"padding-bottom": "2px"}}>0</span>
+                            <i onClick={()=>navigate("/")} class="fas fa-home text-dark"></i>
+                            
                         </a>
-                        <a  class="btn px-0 ml-2">
+                        <a  onClick={()=>navigate("/cart")} class="btn px-0 ml-2">
                             <i class="fas fa-shopping-cart text-dark"></i>
-                            <span class="badge text-dark border border-dark rounded-circle" style={{"padding-bottom": "2px"}}>0</span>
+                            
                         </a>
                     </div>
                 </div>

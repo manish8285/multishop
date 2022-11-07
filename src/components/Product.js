@@ -5,18 +5,16 @@ const Product=({props})=>{
     let navigate = useNavigate()
     const product = props[0] 
     return(
-        <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                        <div onClick={()=>navigate(`/product/${product.id}`)} class="product-item bg-light mb-4">
+        <div class="col-md-6 col-sm-6 pb-1">
+                        <div  class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src={DRIVE_IMAGE_URL+product?.images[0]?.name} alt="product image" />
+                                <img style={{maxHeight:"270px"}} class="img-fluid w-100" src={DRIVE_IMAGE_URL+product?.images[0]?.name} alt="product image" />
                                 <div class="product-action">
                                     <button class="btn btn-outline-dark btn-square" onClick={()=>props[1](product)} ><i class="fa fa-shopping-cart"></i></button>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                                    
                                 </div>
                             </div>
-                            <div class="text-center py-4">
+                            <div onClick={()=>navigate(`/product/${product.id}`)} class="text-center py-4">
                                 <a class="h6 text-decoration-none mx-1" >{product.name}</a>
                                 <div class="d-flex align-items-center justify-content-center mt-2">
                                     <h5>Rs {product.price}</h5><h6 class="text-muted ml-2"><del>Rs {product.mrp}</del></h6>

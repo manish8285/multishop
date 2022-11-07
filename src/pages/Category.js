@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom";
-import { AddToCart, GetCart } from "../services/cart-service";
-import { GetAllProducts, searchProduct } from "../services/product-service";
-import Product from "./Product";
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { FormGroup, Input, Nav, Navbar, NavbarBrand } from "reactstrap";
+import InfiniteScroll from "react-infinite-scroll-component"
+import { useNavigate, useParams } from "react-router-dom"
+import Base from "../components/Base"
+import Product from "../components/Product"
+import { AddToCart, GetCart } from "../services/cart-service"
+import { GetCategoryProducts } from "../services/product-service"
 
-const AllProducts=()=>{
+const Category=()=>{
+    let navigate = useNavigate()
+    
+    const {categoryId} = useParams()
+
+    console.log("category id ="+categoryId)
     const [page,setPage] = useState({
         "totalPages":'',
         "pageSize":'',
@@ -17,11 +22,9 @@ const AllProducts=()=>{
 
     })
 
-    const {q}=useParams()
-   // console.log("q = "+q)
     const [currentPage,setCurrentPage]= useState(0)
 
-    let navigate = useNavigate()
+    
 
     const [mycart,setMycart] = useState(GetCart)
 
@@ -32,83 +35,30 @@ const AllProducts=()=>{
        AddToCart(myproduct)
     }
 
-    useEffect(()=>{
-        console.log(currentPage)
-        changePage();
-    },[currentPage])
+   
 
-    const searchForProduct=(key)=>{
-        searchProduct(key).then(response=>{
-            console.log(response)
-            setPage(response)
-
-        }).catch(error=>{
-            console.log(error)
-        })
-    }
-
-
-    if(q!=0){
-        searchForProduct(q)
-    }
-
-    const changePage=(pageSize=3)=>{
-        GetAllProducts(currentPage,pageSize).then(response=>{
-            console.log("fetching products ...")
+    const changePage=(pageSize=12)=>{
+        GetCategoryProducts(categoryId,currentPage,pageSize).then(response=>{
+            console.log("fetching products...")
             console.log(response)
             setPage({...page,
                 "pageNumber":response.pageNumber,
                 "lastPage":response.lastPage,
-                "products":[...page.products,...response.products]
+                "products":[...response.products]
             })
         }).catch(error=>{
             console.log(error)
         })
     }
+    useEffect(()=>{
+        console.log("page no ="+currentPage)
+        changePage()
+    },[currentPage])
 
-
-    return(
-      
-        <div>
-            {
-        //     <div class="container-fluid bg-dark mb-30 py-2">
-        //         <div class="row px-xl-5 mx-1">
-        //                 <div class="input-group">
-        //                     <input type="text" onChange={(event)=>{searchForProduct(event.target.value)}} class="form-control" placeholder="Search for products" />
-        //                     <div class="input-group-append">
-        //                         <span class="input-group-text bg-transparent text-primary">
-        //                             <i class="fa fa-search"></i>
-        //                         </span>
-        //                     </div>
-        //                 </div>
-                       
-        //         </div>
-                  
-        //     </div>
-
-            }
-        <Navbar dark color="dark mb-5">
-            <Nav className="w-100 row">
-                <FormGroup className="w-100 input-group">
-                <Input type="select" className="mx-md-1 bg-primary"  style={{maxWidth:"50px"}}>
-                    <option selected>All</option>
-                    <option>Category One</option>
-                    <option>Category Two</option>
-                </Input>
-                <Input type="text" className="form-control" placeholder="Multishop | Search for products" onChange={(event)=>{searchForProduct(event.target.value)}} />
-                <div class="input-group-append">
-                                 <span class="input-group-text bg-transparent text-primary">
-                                    <i class="fa fa-search"></i>
-                                </span>
-                             </div>
-                </FormGroup>
-            </Nav>
-
-        </Navbar>
-
-
-  
-    <div class="container-fluid">
+    return (
+        
+        <Base>
+        <div class="container-fluid mt-3">
         <div class="row">
           
             <div class="col-md-2 col-md-offset-2 not-mobile">
@@ -136,7 +86,7 @@ const AllProducts=()=>{
             <div class="col-md-7">
 
 
-                    <InfiniteScroll
+                    {/* <InfiniteScroll
                         dataLength={page.totalElements}
                         hasMore={!page.lastPage}
                         next={()=>{setCurrentPage(currentPage+1)}}
@@ -144,9 +94,41 @@ const AllProducts=()=>{
                         className="row"
                         
                     >
+    */}
+                    <div className="row">
                     {page.products.map(product=>(<Product key={product.id} props={[product,myfun]}  />))}
-                    </InfiniteScroll>
-               
+                    </div>
+                    {/* </InfiniteScroll>  */}
+                    <div >
+                        <nav>
+                          <ul class="pagination justify-content-center">
+                            {
+                                (currentPage>0) &&(
+                                    <>
+                                    <li class="page-item"><a class="page-link" onClick={()=>setCurrentPage(currentPage-1)}><span>Previous</span></a></li>
+                                    <li class="page-item"><a class="page-link" onClick={()=>setCurrentPage(currentPage-1)}>{currentPage}</a></li>
+                                    </>
+                                )
+                            }
+                           
+                            
+                            {
+                                (!page.lastPage) && (
+                                <>
+                                <li class="page-item active"><a class="page-link">{currentPage+1}</a></li>
+                                <li class="page-item"><a class="page-link" onClick={()=>setCurrentPage(currentPage+1)}>{currentPage+2}</a></li>
+                                </>
+                                )
+                            }
+                            
+                            {
+                                (!page.lastPage) && (
+                                    <li class="page-item"><a class="page-link" onClick={()=>setCurrentPage(currentPage+1)}>Next</a></li>
+                                )
+                            }
+                          </ul>
+                        </nav>
+                    </div>
             </div>
         </div>
             
@@ -163,8 +145,8 @@ const AllProducts=()=>{
             </div>
 
         </div>
-    </div>
+  
+    </Base>
     )
 }
-
-export default AllProducts
+export default Category
