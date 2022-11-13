@@ -3,9 +3,31 @@ import { Button, FormGroup, Input, Nav, Navbar } from "reactstrap"
 import AllProducts from "../components/AllProducts"
 import Base from "../components/Base"
 import OwlCarousel from 'react-owl-carousel';
+import { useEffect, useState } from "react";
+import { getAllCategories } from "../services/product-service";
 
 const Landing=()=>{
     let navigate =useNavigate()
+
+    const [categories,setCategories]=useState([])
+
+    useEffect(()=>{
+        getAllCategories().then(data=>{
+            setCategories(data)
+            console.log(categories)
+        },[])
+    },[])
+    useEffect(()=>{
+        getAllCategories().then(data=>{
+            //setCategories(data)
+            console.log(categories)
+        },[])
+    },[categories])
+
+    const goToCategory=()=>{
+       const catId= document.getElementById("category").value
+        navigate("/category/"+catId)
+    }
 
     const options = {
         margin: 30,
@@ -37,11 +59,23 @@ const Landing=()=>{
             <Navbar dark color="dark mb-5">
             <Nav className="w-100 row">
                 <FormGroup className="w-100 input-group">
-                <Input type="select" className="mx-md-1 bg-primary"  style={{maxWidth:"50px"}}>
-                    <option selected>All</option>
-                    <option >Category One</option>
-                    <option>Category Two</option>
-                </Input>
+                {/* <Input type="select" className="mx-md-1 bg-primary"  style={{maxWidth:"50px"}}>
+                    
+                    {
+                        categories?.map((cat)=>{
+                            <option  onClick={()=>navigate("/category/"+cat.id)} > {cat.name}</option>
+                        })
+                    }
+                </Input> */}
+                <Input id="category" onChange={()=>goToCategory()} type="select" className="bg-primary mx-md-1" style={{maxWidth:"50px"}} >
+                                        <option value="home"  disabled selected > ALL </option>
+                                        {
+                                            categories.map((category,index)=>(
+                                                <option key={index} id={category.id}  value={category.id}  >{category.name}</option>
+                                            ))
+                                        }
+                                        
+                                    </Input>
                 <Input type="text" className="form-control" id="searchBox" placeholder="Multishop | Search for products"  />
                 <div class="input-group-append" onClick={()=>navigate(`/home/${document.getElementById("searchBox").value}`)} >
                                  <span class="input-group-text bg-transparent text-primary">
@@ -485,12 +519,6 @@ const Landing=()=>{
 
         </OwlCarousel>
     </div>
-
-        <Button onClick={()=>navigate("/category/5")} > cat 5</Button>
-        <Button onClick={()=>navigate("/category/1")} > cat 1</Button>
-        <Button onClick={()=>navigate("/category/2")} > cat 2</Button>
-
-
             </>
             
         </Base>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { toast } from "react-toastify"
 import { Table } from "reactstrap"
 import { AddToCart, GetCart, SubstractFromCart } from "../services/cart-service"
 import { BASE_URL, DRIVE_IMAGE_URL } from "../services/helper"
@@ -12,6 +13,7 @@ const SingleProductComponent=()=>{
     const [product,setProduct]=useState({"images":[]})
     let navigate = useNavigate()
     const [mycart,setMycart] = useState(GetCart)
+    const [added_to_card,setAdded_to_cart] = useState(false)
 
     window.addEventListener('cart',()=>{setMycart(GetCart)})
 
@@ -34,7 +36,7 @@ const SingleProductComponent=()=>{
             <div class="col-lg-5 mb-30">
                 
                         
-                <img class="w-100 h-100" src={DRIVE_IMAGE_URL+product.images[0]?.name} alt="Image"/>
+                <img style={{maxWidth:"450px"}} class="w-100 h-100" src={DRIVE_IMAGE_URL+product.images[0]?.name} alt="Image"/>
                         
                
             </div>
@@ -58,34 +60,25 @@ const SingleProductComponent=()=>{
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style={{width: "130px"}}>
                             <div class="input-group-btn">
-                                <button onClick={()=>{SubstractFromCart(product.id)}} class="btn btn-primary btn-minus">
+                                <button onClick={()=>{SubstractFromCart(product.id);toast.warning("Substracted from cart -1")}} class="btn btn-primary btn-minus">
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
                             <input type="text" class="form-control bg-secondary border-0 text-center" value="1"/>
                             <div class="input-group-btn">
-                                <button onClick={()=>AddToCart(product)} class="btn btn-primary btn-plus">
+                                <button onClick={()=>{AddToCart(product);toast.success("added to cart +1")}} class="btn btn-primary btn-plus">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <button onClick={()=>{AddToCart(product)}} class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                        <button disabled={added_to_card} onClick={(event)=>{AddToCart(product);setAdded_to_cart(true)}} class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
                             Cart</button>
                     </div>
                     <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Share on:</strong>
                         <div class="d-inline-flex">
-                            <a class="text-dark px-2" href="">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a class="text-dark px-2" href="">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a class="text-dark px-2" href="">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a class="text-dark px-2" href="">
-                                <i class="fab fa-pinterest"></i>
+                            <a href={`whatsapp://send?text=${window.location.href}`} class="text-dark px-2" >
+                            <i class="fab fa-whatsapp"></i>
                             </a>
                         </div>
                     </div>
@@ -122,6 +115,18 @@ const SingleProductComponent=()=>{
                                 <td>{product.rack}</td>
                             </tr>
                             <tr>
+                                <th>Pathy</th>
+                                <td>{product.pathy}</td>
+                            </tr>
+                            <tr>
+                                <th>Expiry Date</th>
+                                <td>{product.expiry}</td>
+                            </tr>
+                            <tr>
+                                <th>Size</th>
+                                <td>{product.size}</td>
+                            </tr>
+                            <tr>
                                 <th>Available Units</th>
                                 <td>{product.quantity}</td>
                             </tr>
@@ -150,6 +155,10 @@ const SingleProductComponent=()=>{
                                 <div class="row">
         
                             </div>
+
+                            <h4>Tags</h4>
+                            <br></br>
+                            <small>{product.tags}</small>
                         </div>
     
                     </div>

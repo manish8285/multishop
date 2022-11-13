@@ -20,6 +20,8 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import ForgetPassword from './pages/ForgetPassword';
 import Category from './pages/Category';
+import Profile from './pages/Profile';
+import Testpage from './pages/Testpage';
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
         <Route path='/forget-password' element={<ForgetPassword />} />
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/myorders' element={<MyOrders />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/test' element={<Testpage />} />
         <Route path='/order-detail/:orderId' element={<OrderDetail />} />
       </Routes>
     </HashRouter>

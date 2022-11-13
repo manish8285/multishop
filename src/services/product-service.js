@@ -18,3 +18,8 @@ export const GetProductById=(productId)=>{
     const url= BASE_URL+`products/product/${productId}`
     return myAxios.get(url).then(response=>response.data)
 }
+
+export const getAllCategories=()=>{
+    const url = `products/categories/`
+    return myAxios.get(url).then(response=>response.data)
+}

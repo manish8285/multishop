@@ -6,7 +6,7 @@ import { getCurrentUserDetail, isLogedIn } from "../auth"
 import Base from "../components/Base"
 import { ClearCart, GetCart } from "../services/cart-service"
 import { privateAxios } from "../services/helper"
-import { PlaceOrderRequest, SaveCustomerAddress } from "../services/order-service"
+import { GetMyDeliveryCharge, PlaceOrderRequest, SaveCustomerAddress } from "../services/order-service"
 import { login,getCutomer } from "../services/user_service"
 
 const Checkout=()=>{
@@ -19,6 +19,7 @@ const Checkout=()=>{
 
     let navigate =useNavigate()
     const [myCart,setMycart]=useState(GetCart())
+    const [shipping,setShipping] = useState(0)
     const [subtotal,setSubtotal] = useState(0)
 
     //declare list of items for  order
@@ -97,14 +98,38 @@ const Checkout=()=>{
         toast.info("You don't have any item in your cart")
         navigate("/cart")
     }
+    //calculate shipping charge
+    const calculateDeliveryCharge=()=>{
+        const pincode=order?.address?.pincode
+        console.log("pincode ="+pincode)
+        if(pincode != undefined && pincode != ""){
+            GetMyDeliveryCharge(pincode).then(price=>{
+                setShipping(price);
+            }).catch(error=>{
+                console.log(error)
+            })
+        }
+    }
+
+    const shippingCharge=(pincode)=>{
+        if(pincode.toString().length>=6){
+            GetMyDeliveryCharge(pincode).then(price=>{
+                setShipping(price)
+            }).catch(error=>{
+                console.log(error)
+            })
+        }
+    }
 
     //set address to order
-    useEffect(()=>{
-        setOrder({
-            ...order,
-            "address":daddress
-        })
-    },[daddress])
+    // useEffect(()=>{
+    //     setOrder({
+    //         ...order,
+    //         "address":daddress
+    //     })
+    //     calculateDeliveryCharge()
+    // },[daddress])
+
 
     const updateSubTotal=()=>{
         let total = 0
@@ -119,9 +144,11 @@ const Checkout=()=>{
     }
 
     const selectAddress=(addressId)=>{
+        console.log(addressId)
         customer.address.map((add)=>{
             if(add.id==addressId){
                 setDaddress(add)
+                shippingCharge(add.pincode)
             }
         })
     }
@@ -182,8 +209,8 @@ const Checkout=()=>{
                     <div class="">
 
                     {
-                        customer.address.map((address)=>(
-                            <div class=" form-group">
+                        customer.address.map((address,index)=>(
+                            <div class=" form-group" key={index}>
                             <div class="custom-control custom-radio">
                             <Input class="custom-control-input" onChange={()=>selectAddress(address.id)} type="radio" id={'address'+address.id} name="address" /> 
                             <Label for={'address'+address.id} className="form-control" style={{height:"auto"}} >{address.name}<br />  {address.address}
@@ -245,8 +272,8 @@ const Checkout=()=>{
                     <div class="border-bottom">
                         <h6 class="mb-3">Products</h6>
                         {
-                            order.items.map((item)=>(
-                                <div class="d-flex justify-content-between">
+                            order.items.map((item,index)=>(
+                                <div class="d-flex justify-content-between" key={index}>
                                     <p>{item.product.name.substring(0,30)} X {item.quantity} </p>
                                     <p>Rs{item.price}</p>
                                 </div>
@@ -261,13 +288,13 @@ const Checkout=()=>{
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Shipping</h6>
-                            <h6 class="font-weight-medium">Rs 0</h6>
+                            <h6 class="font-weight-medium">Rs {shipping}</h6>
                         </div>
                     </div>
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
-                            <h5>Rs{subtotal}</h5>
+                            <h5>Rs{subtotal+shipping}</h5>
                         </div>
                     </div>
                 </div>

@@ -42,7 +42,7 @@ const Login=()=>{
             setErrors(error.response.data)
             //console.log(error)
            // console.log(errors)
-            if(error.response.status===401){
+            if(error.response.status===401 || error.response.status==400){
                 toast.error("Credentials do not match")
             }
         })
@@ -54,6 +54,9 @@ const Login=()=>{
 
                     <div className="card mt-2">
                         <div className="card-body">
+                            <Container className="text-center">
+                            <h4 className="text-primary">MULTISHOP | LOGIN</h4>
+                            </Container>
                         <Form className="">
                         <FormFeedback invalid>
                                 {JSON.stringify(logindata.error)}

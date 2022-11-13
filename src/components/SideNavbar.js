@@ -25,7 +25,7 @@ const SideNavbar=()=>{
                 {
                      isLogedIn() &&(
                         <>
-                        <p  >{  getCurrentUserDetail().name}</p>
+                        <p onClick={()=>navigate("/profile")} >{  getCurrentUserDetail().name}</p>
                         </>
                         ) 
                 }
@@ -42,11 +42,12 @@ const SideNavbar=()=>{
                 {
                     isLogedIn() && (
                         <>
-                        <NavItem className="sidebarItem">
-                        <NavLink tag={ReactLink} to="/myorders"><i class="fas fa-shopping-cart"></i> My Orders</NavLink>
-                        </NavItem>
+                        
                         <NavItem className="sidebarItem">
                         <NavLink tag={ReactLink} onClick={()=>logOut()} ><i class="fas fa-sign-out-alt"></i> Logout</NavLink>
+                        </NavItem>
+                        <NavItem className="sidebarItem">
+                        <NavLink tag={ReactLink} to="/myorders"><i class="fas fa-box-open"></i> My Orders</NavLink>
                         </NavItem>
                         </>
                     )
@@ -54,6 +55,9 @@ const SideNavbar=()=>{
 
                 <NavItem className="sidebarItem">
                 <NavLink tag={ReactLink} to="/"><i class="fas fa-home"></i> Home</NavLink>
+                </NavItem>
+                <NavItem className="sidebarItem">
+                <NavLink tag={ReactLink} to="/cart"><i class="fas fa-shopping-cart"></i> Cart</NavLink>
                 </NavItem>
 
                 </Nav>

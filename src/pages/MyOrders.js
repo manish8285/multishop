@@ -47,14 +47,13 @@ const MyOrders=()=>{
           
             <div class="row mt-2">
             <div class="col-12">
-                <nav class="breadcrumb bg-light mb-30">
-                    <a onClick={()=>{navigate("/")}} class="breadcrumb-item text-dark" >Home</a>
-                    <span class="breadcrumb-item active">My Orders</span>
+                <nav class="breadcrumb bg-dark mb-30">
+                    <a onClick={()=>{navigate("/")}} class="breadcrumb-item text-primary" ><i class="fas fa-arrow-left"></i></a>
+                    <span class="breadcrumb-item active text-primary">My Orders</span>
                     </nav>
                 </div>
             
         </div>
-        <div className="row">
                            <InfiniteScroll
                            dataLength={page.totalElements}
                            hasMore={!page.lastPage}
@@ -66,36 +65,45 @@ const MyOrders=()=>{
                 
                 page.orders.map((order,index)=>(
                     <Card className="mt-2" key={index}>
-                   <CardHeader>
-                   <i class="fas fa-gifts"></i>  Order Id : <b className="mr-3">{order.orderId}</b> <i class="fas fa-rupee-sign"> <b className="mr-3">{order.amount}</b></i> <i class="fas fa-calendar-check ml-3"></i> <b> {order.date.substring(0,10)}</b>  <p className="float-right"><i class="fas fa-check-circle"></i> Status : <b >{order.status[order.status?.length-1]?.status} </b> </p>
+                   <CardHeader onClick={()=>{navigate("/order-detail/"+order.orderId)}} >
+                   <i class="fas fa-gifts"></i> <b className="mr-3">{order.orderId}</b> <i class="fas fa-rupee-sign"> <b className="mr-3">{order.amount}</b></i> <i class="fas fa-calendar-check"> <b> {order.date.substring(0,10)}</b></i>   <p className="float-right"><i class="fas fa-check-circle"></i> Status : <b >{order.status[order.status?.length-1]?.status} </b> </p>
                    </CardHeader>
                    <CardBody>
                        
 
 
-                           <div className="row">
-                           
-                               {
+                           <div className="row" style={{flexWrap:"unset"}}>
+                                <Col  sm="3" style={{width:"auto"}} >
+                                   
+                                    <img className="mb-1" width={"90px"} src={DRIVE_IMAGE_URL+order?.items[0]?.product.images[0].name} alt="product image" />
 
-                                   order.items?.map((item,index)=>(
-                                    <Col sm="5" md="2">
-                                    <Card key={index}>
-                                        <img  src={DRIVE_IMAGE_URL+item.product.images[0].name} alt="product image" />
-                                        <CardText>{item.product.name} X {item.quantity}</CardText>
-                                    </Card>
-                                    </Col>
-                                ))
-                               }
-                            </div>
-                           
-                      
+                                </Col>
+
+                               <Col sm="9" style={{width:"auto"}} >
+                                   <div>
+                                   <p className="my-0">
+                                {
+
+                                    order.items?.map((item,index)=>(
+                                    <>
+                                     {item.product.name} X {item.quantity} 
+                                    </>
+                                    ))
+                                   
+                                    }
+                                    </p>
+                                       <small className="my-0 py-0" >{order.address.name}, {order.address.address}, {order.address.city}, {order.address.pincode}, {order.address.mobile}</small>
+                                </div>   
+
+                           </Col>
+                      </div>
                    </CardBody>
                </Card> 
                 ))
                
             }
             </InfiniteScroll>
-            </div>
+
             </Container>
             </>
         </Base>

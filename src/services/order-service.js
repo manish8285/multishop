@@ -21,6 +21,11 @@ export const GetMyOrderStatus=(orderId)=>{
     return privateAxios.get(url).then(response=>response.data)
 }
 
+export const GetMyDeliveryCharge=(pincode)=>{
+    let url=`customer/delivery/${pincode}`
+    return privateAxios.get(url).then(response=>response.data)
+}
+
 export const GetMyOrderById=(orderId)=>{
     let url=BASE_URL+`customer/myorder/order/${orderId}`
     return privateAxios.get(url).then(response=>response.data)
