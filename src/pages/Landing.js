@@ -5,6 +5,7 @@ import Base from "../components/Base"
 import OwlCarousel from 'react-owl-carousel';
 import { useEffect, useState } from "react";
 import { getAllCategories } from "../services/product-service";
+import Footer from "../components/Footer";
 
 const Landing=()=>{
     let navigate =useNavigate()
@@ -71,7 +72,7 @@ const Landing=()=>{
                                         <option value="home"  disabled selected > ALL </option>
                                         {
                                             categories.map((category,index)=>(
-                                                <option key={index} id={category.id}  value={category.id}  >{category.name}</option>
+                                                <option className="px-1" key={index} id={category.id}  value={category.id}  >{category.name}</option>
                                             ))
                                         }
                                         
@@ -103,7 +104,7 @@ const Landing=()=>{
                                 <div class="p-3" style={{"max-width":"700px;"}}>
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Beauti Products</h1>
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Buy Homoeopathic natural personal care products</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" onClick={()=>navigate("/category/3")} >Shop Now</a>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +114,7 @@ const Landing=()=>{
                                 <div class="p-3" style={{maxWidth: "700px"}}>
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Pain Killer</h1>
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Buy Most Effective Homoeopathic Pain killer Oil and Medicine</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" onClick={()=>navigate("/home/pain")}>Shop Now</a>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +124,7 @@ const Landing=()=>{
                                 <div class="p-3" style={{maxWidth: "700px"}}>
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Multipurpose Cream</h1>
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Goodness of Homoeopathic that provide healthy skin and Natural Glow</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="#">Shop Now</a>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" onClick={()=>navigate("/home/cream")}>Shop Now</a>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +137,7 @@ const Landing=()=>{
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">Save 20%</h6>
                         <h3 class="text-white mb-3">All Homoeopathic Medicine</h3>
-                        <a href="" class="btn btn-primary">Shop Now</a>
+                        <a onClick={()=>navigate("/home/0")} class="btn btn-primary">Shop Now</a>
                     </div>
                 </div>
                 <div class="product-offer mb-30" style={{height: "200px"}}>
@@ -144,7 +145,7 @@ const Landing=()=>{
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">Save 50%</h6>
                         <h3 class="text-white mb-3">All Loose Medicine</h3>
-                        <a href="" class="btn btn-primary">Shop Now</a>
+                        <a onClick={()=>navigate("/home/0")} class="btn btn-primary">Shop Now</a>
                     </div>
                 </div>
             </div>
@@ -164,7 +165,7 @@ const Landing=()=>{
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center bg-light mb-4" style={{padding: "30px"}}>
                     <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
-                    <h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
+                    <h5 class="font-weight-semi-bold m-0">Fast Shipping</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
@@ -248,17 +249,11 @@ const Landing=()=>{
         <div class="row px-xl-5">
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/alfa-alfa-tonic.png" style={{maxHeight:"300px"}} alt="" />
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
+                    <div class="product-img position-relative overflow-hidden text-center">
+                        <img class="img-fluid w-100" src="img/alfa-alfa-tonic.png" style={{maxHeight:"300px",maxWidth:"200px"}} alt="" />
                     </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Energy Tonic</a>
+                    <div class="text-center py-4" onClick={()=>navigate("/home/alfalfa")} >
+                        <a class="h6 text-decoration-none text-truncate" >Homeopathic Energy Tonic</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h5>₹125.00</h5><h6 class="text-muted ml-2"><del>₹150.00</del></h6>
                         </div>
@@ -275,17 +270,11 @@ const Landing=()=>{
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/livtsbl.jpg" style={{maxHeight:"300px"}}  alt="" />
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
+                    <div class="product-img position-relative overflow-hidden text-center">
+                        <img class="img-fluid w-100" src="img/livtsbl.jpg" style={{maxHeight:"300px",maxWidth:"200px"}}  alt="" />
                     </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Liver Tonic</a>
+                    <div class="text-center py-4" onClick={()=>navigate("/home/liver")} >
+                        <a class="h6 text-decoration-none text-truncate">Homeopathic Liver Tonic</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h5>₹110.00</h5><h6 class="text-muted ml-2"><del>₹150.00</del></h6>
                         </div>
@@ -302,17 +291,11 @@ const Landing=()=>{
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/stobalsbl.jpg" style={{maxHeight:"300px"}} alt="" />
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
+                    <div class="product-img position-relative overflow-hidden text-center">
+                        <img class="img-fluid w-100" src="img/stobalsbl.jpg" style={{maxHeight:"300px",maxWidth:"200px"}} alt="" />
                     </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Cough Syrup</a>
+                    <div class="text-center py-4" onClick={()=>navigate("/home/cough")} >
+                        <a class="h6 text-decoration-none text-truncate" >Homeopathic Cough Syrup</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h5>₹55.00</h5><h6 class="text-muted ml-2"><del>₹100.00</del></h6>
                         </div>
@@ -328,74 +311,14 @@ const Landing=()=>{
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <div class="product-item bg-light mb-4">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="img/r18.webp" style={{maxHeight:"300px"}} alt="" />
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
+                <div class="product-item bg-light mb-4" onClick={()=>navigate("/home/jaborandi")}>
+                    <div class="product-img position-relative overflow-hidden text-center">
+                        <img class="img-fluid w-100" style={{maxHeight:"300px",minHeight:"250px",maxWidth:"200px"}} src="img/jaborandi.jpg" alt="" />
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Dr Reckeweg Medicine R18</a>
+                        <a class="h6 text-decoration-none text-truncate" href="">Homeopathic Hair Oil</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>₹240.00</h5><h6 class="text-muted ml-2"><del>₹255.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="far fa-star text-primary mr-1"></small>
-                            <small class="far fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <div class="product-item bg-light mb-4">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" style={{maxHeight:"300px"}} src="img/heklalava.jpg" alt="" />
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Wheezal Hekla Lava toothpaste</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <div class="product-item bg-light mb-4">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" style={{maxHeight:"300px"}} src="img/jaborandi.jpg" alt="" />
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Wheezal Jaborandi Hair Oil</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            <h5>₹123.00</h5><h6 class="text-muted ml-2"><del>₹123.00</del></h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
@@ -410,19 +333,35 @@ const Landing=()=>{
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" style={{maxHeight:"300px"}} src="img/aquiplus.webp" alt="" />
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
+                    <div class="product-img position-relative overflow-hidden text-center">
+                        <img class="img-fluid w-100" style={{maxHeight:"300px",minHeight:"250px",maxWidth:"200px"}} src="img/heklalava.jpg" alt="" />
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Acquiplus Cream</a>
+                        <a class="h6 text-decoration-none text-truncate" onClick={()=>navigate("/home/toothpaste")}>Homoeopathic Toothpaste</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            <h5>₹123.00</h5><h6 class="text-muted ml-2"><del>₹123.00</del></h6>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center mb-1">
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small>(99)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <div class="product-item bg-light mb-4">
+                    <div class="product-img position-relative overflow-hidden text-center">
+                        <img class="img-fluid w-100" style={{maxHeight:"300px",minHeight:"250px",maxWidth:"200px"}} src="img/aquiplus.webp" alt="" />
+                    </div>
+                    <div class="text-center py-4">
+                        <a class="h6 text-decoration-none text-truncate" onClick={()=>navigate("/home/cream")}>Homoeopathic Cream</a>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            <h5>₹123.00</h5><h6 class="text-muted ml-2"><del>₹123.00</del></h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
@@ -437,19 +376,13 @@ const Landing=()=>{
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" style={{maxHeight:"300px"}} src="img/aquiplusfacewash.jpg" alt="" />
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
+                    <div class="product-img position-relative overflow-hidden text-center">
+                        <img class="img-fluid w-100" style={{maxHeight:"300px",maxWidth:"200px"}} src="img/aquiplusfacewash.jpg" alt="" />
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Acquiplus Facewash</a>
+                        <a class="h6 text-decoration-none text-truncate" onClick={()=>navigate("/home/facewash")}>Homoeopathic Facewash</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                            <h5>₹123.00</h5><h6 class="text-muted ml-2"><del>₹123.00</del></h6>
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
@@ -473,19 +406,19 @@ const Landing=()=>{
                 <div class="product-offer mb-30" style={{height: "300px"}}>
                     <img class="img-fluid" src="img/doctor1.jpg" alt="" />
                     <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 100%</h6>
-                        <h3 class="text-white mb-3">Free Doctor Cosultancy</h3>
-                        <a href="" class="btn btn-primary">Contact Now</a>
+                        <h6 class="text-white text-uppercase">Save 90%</h6>
+                        <h3 class="text-white mb-3">Doctor Cosultancy at Just ₹200</h3>
+                        <a disabled href="" class="btn btn-primary">Contact Now</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="product-offer mb-30" style={{height: "300px"}}>
-                    <img class="img-fluid" src="img/aayurvedic1.jpg" alt="" />
+                    <img class="img-fluid" src="img/Blood-test.png" alt="" />
                     <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 20%</h6>
-                        <h3 class="text-white mb-3">All Ayurvedic Medicine</h3>
-                        <a href="" class="btn btn-primary">Shop Now</a>
+                        <h6 class="text-white text-uppercase">Save 50%</h6>
+                        <h3 class="text-white mb-3">LAB TESTS AT HOME</h3>
+                        <a disabled href="" class="btn btn-primary">Schedule</a>
                     </div>
                 </div>
             </div>
@@ -519,6 +452,7 @@ const Landing=()=>{
 
         </OwlCarousel>
     </div>
+
             </>
             
         </Base>

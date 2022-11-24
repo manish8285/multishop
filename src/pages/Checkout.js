@@ -10,14 +10,18 @@ import { GetMyDeliveryCharge, PlaceOrderRequest, SaveCustomerAddress } from "../
 import { login,getCutomer } from "../services/user_service"
 
 const Checkout=()=>{
-    //if not login ask for login
-    if(!isLogedIn()){
-        navigate("/login")
-        
-    }
-
-
     let navigate =useNavigate()
+    //if not login ask for login
+    
+    useEffect(()=>{
+        if(!isLogedIn()){
+            navigate("/login")
+            
+        }
+    },[])
+
+
+    
     const [myCart,setMycart]=useState(GetCart())
     const [shipping,setShipping] = useState(0)
     const [subtotal,setSubtotal] = useState(0)
@@ -55,13 +59,14 @@ const Checkout=()=>{
 
     //fetch customer 
     useEffect(()=>{
-        
+        if(isLogedIn()){
         privateAxios.get(`customer/${getCurrentUserDetail().id}`).then((data)=>{
             setCustomer(data.data)
          }).catch(error=>{
              console.log(error)
          })
          setMycart(GetCart())
+        }
         
      },[])
 

@@ -60,9 +60,9 @@ const Signup=()=>{
         verifyEmailUnique(userdata.email).then(data=>{
             setValid({...valid,"email":true})
             //setErrors({...errors,"email":data})
-            //console.log(data)
+            console.log(data)
         }).catch(error=>{
-           // console.log(error)
+           console.log(error)
             setValid({...valid,"email":false})
             setErrors({...errors,"email":error.response.data})
         })
@@ -72,17 +72,20 @@ const Signup=()=>{
     }
 
     const attemptSignup=()=>{
+        
         if(valid.name==true && valid.password==true && valid.email==true){
         signUp(userdata).then((data)=>{
-           // console.log(data)
-            doLogin(data,()=>{
-                
-            })
             toast.success("You have registered successfully !!!")
-           // window.URL="/"
+           // window.URL="/login"
+           //window.location.href="/#/login"
             navigate("/login")
+            console.log(data)
+            // doLogin(data,()=>{
+                
+            // })
+            
         }).catch((error)=>{
-            //console.log(error)
+            console.log(error)
             setErrors(error.response.data)
         })
     }else{
@@ -92,6 +95,8 @@ const Signup=()=>{
         toast.error("Please correct all the information first")
         return
     }
+    
+   //navigate("/login")
     }
     useEffect(()=>{
         
@@ -140,7 +145,7 @@ const Signup=()=>{
                 </FormGroup>
 
                 <Container className="text-center">
-                <button className="btn btn-primary" onClick={()=>attemptSignup()}>Signup</button>
+                <button type="button" className="btn btn-primary" onClick={()=>attemptSignup()}>Signup</button>
                 </Container>
  
 </Form>

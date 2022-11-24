@@ -40,7 +40,7 @@ const Login=()=>{
            //console.log(data)
         }).catch((error)=>{
             setErrors(error.response.data)
-            //console.log(error)
+            console.log(error)
            // console.log(errors)
             if(error.response.status===401 || error.response.status==400){
                 toast.error("Credentials do not match")

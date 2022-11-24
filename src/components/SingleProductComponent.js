@@ -143,9 +143,10 @@ const SingleProductComponent=()=>{
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-pane-1">
                             <h4 class="mb-3">More Images</h4>
+                            <br />
                             {
                             product.images.map((img)=>(
-                                <img className={"img-fluid w-100"} key={img.id} src={DRIVE_IMAGE_URL+img.name} alt="Image"/>
+                                <img style={{maxHeight:"600px",maxWidth:"400px"}} className={"img-fluid w-100"} key={img.id} src={DRIVE_IMAGE_URL+img.name} alt="Image"/>
                                 ))
                             }
                         </div>

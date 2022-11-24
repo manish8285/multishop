@@ -1,3 +1,4 @@
+import Footer from "./Footer";
 import HomeNavbar from "./HomeNavbar";
 import SideNavbar from "./SideNavbar";
 import TopNavbar from "./TopNavbar";
@@ -11,7 +12,10 @@ const Base=({children})=>{
                     <div className="" id="bodyArea">
                     <TopNavbar />
                     {children}
+
+                    <Footer/>
                     </div>  
+                    
             </div>
         
     )

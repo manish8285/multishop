@@ -22,6 +22,10 @@ import ForgetPassword from './pages/ForgetPassword';
 import Category from './pages/Category';
 import Profile from './pages/Profile';
 import Testpage from './pages/Testpage';
+import ContactUs from './pages/ContactUs';
+import AboutUs from './pages/AboutUs';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import ReturnPolicy from './pages/ReturnPolicy';
 
 function App() {
   return (
@@ -41,6 +45,10 @@ function App() {
         <Route path='/myorders' element={<MyOrders />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/test' element={<Testpage />} />
+        <Route path='/contactus' element={<ContactUs />} />
+        <Route path='/aboutus' element={<AboutUs />} />
+        <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+        <Route path='/return-policy' element={<ReturnPolicy />} />
         <Route path='/order-detail/:orderId' element={<OrderDetail />} />
       </Routes>
     </HashRouter>

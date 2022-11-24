@@ -38,7 +38,6 @@ const Profile=()=>{
     }
 
     const updateProfile=()=>{
-        console.log(user)
         
         updateUser(user).then(data=>{
             toast.success("user has been updated successfully")
@@ -127,7 +126,7 @@ const Profile=()=>{
                 </Card>
                 ))}
             </div>
-            <div id="multishop-pane-2">
+            <div id="multishop-pane-2" style={{display:"none"}} >
                 {/* profile edit card */}
                 <Card style={{maxWidth:"600px",margin:"5px auto"}}>
                     <CardBody>
@@ -150,8 +149,9 @@ const Profile=()=>{
                             </tr>
                             <tr>
                                 <th>Gender :</th>
-                                <td><Input onChange={()=>updateGender()} id="gender"  className="form-control" type="select" >
-                                    <option  value="MALE">MALE</option>
+                                <td><Input defaultValue={"MALE"} onChange={()=>updateGender()} id="gender"  className="form-control" type="select" >
+                                <option selected > ---Select--- </option>
+                                    <option value="MALE">MALE</option>
                                     <option  value="FEMALE" >FEMALE</option>
                                     </Input></td>
                             </tr>

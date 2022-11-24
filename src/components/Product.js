@@ -7,8 +7,8 @@ const Product=({props})=>{
     return(
         <div class="col-md-6 col-sm-6 pb-1">
                         <div  class="product-item bg-light mb-4">
-                            <div class="product-img position-relative overflow-hidden">
-                                <img style={{maxHeight:"270px"}} class="img-fluid w-100" src={DRIVE_IMAGE_URL+product?.images[0]?.name} alt="product image" />
+                            <div class="product-img position-relative overflow-hidden text-center">
+                                <img style={{maxHeight:"300px",maxWidth:"200px"}} class="img-fluid w-100" src={DRIVE_IMAGE_URL+product?.images[0]?.name} alt="product image" />
                                 <div class="product-action">
                                     <button class="btn btn-outline-dark btn-square" onClick={()=>props[1](product)} ><i class="fa fa-shopping-cart"></i></button>
                                     
