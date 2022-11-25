@@ -1,5 +1,5 @@
 import { getCurrentUserDetail } from "../auth"
-import { BASE_URL, privateAxios } from "./helper"
+import { BASE_URL, myAxios, privateAxios } from "./helper"
 
 export const SaveCustomerAddress=(address)=>{
     let url = BASE_URL+`customer/address/${getCurrentUserDetail().id}`
@@ -22,8 +22,8 @@ export const GetMyOrderStatus=(orderId)=>{
 }
 
 export const GetMyDeliveryCharge=(pincode)=>{
-    let url=`customer/delivery/${pincode}`
-    return privateAxios.get(url).then(response=>response.data)
+    let url=`auth/delivery/${pincode}`
+    return myAxios.get(url).then(response=>response.data)
 }
 
 export const GetMyOrderById=(orderId)=>{

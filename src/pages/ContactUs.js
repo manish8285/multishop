@@ -5,12 +5,24 @@ import { sendEmail } from "../services/email_service"
 
 const ContactUs=()=>{
     const [email,setEmail] = useState({
+        from_name:"",
         from_email:"",
         subject:"",
         message:""
     })
 
+    const resetEmail=()=>{
+        setEmail({
+            from_name:"",
+            from_email:"",
+            subject:"",
+            message:""
+        })
+    }
+
     const sendMyEmail=()=>{
+        toast.info("please wait while sending message...")
+        resetEmail()
         console.log(email)
         sendEmail(email).then(data=>{
             console.log(data)
@@ -42,7 +54,7 @@ const ContactUs=()=>{
                     <div id="success"></div>
                     <form name="sentMessage" id="contactForm" novalidate="novalidate">
                         <div className="control-group">
-                            <input type="text" class="form-control" id="name" placeholder="Your Name"
+                            <input type="text" class="form-control" value={email.from_name} onChange={(event)=>setEmail({...email,from_name:event.target.value})} id="name" placeholder="Your Name"
                                 required="required" data-validation-required-message="Please enter your name" />
                             <p className="help-block text-danger"></p>
                         </div>
