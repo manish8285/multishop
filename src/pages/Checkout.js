@@ -154,6 +154,7 @@ const Checkout=()=>{
             if(add.id==addressId){
                 setDaddress(add)
                 shippingCharge(add.pincode)
+                setOrder({...order,address:add})
             }
         })
     }
@@ -171,7 +172,7 @@ const Checkout=()=>{
     }
 
      const placeOrder=()=>{
-            if(order.address.name==''){
+            if(order?.address?.name==''){
                 toast.error("Please select Address")
                 return
             }
@@ -179,11 +180,18 @@ const Checkout=()=>{
                 toast.error("Please select Payment Option")
                 return
             }
+
             PlaceOrderRequest(order).then((data)=>{
-                toast.success("Order has been placed successfully")
-                //console.log(data)
+               // toast.success("Order has been placed successfully")
+                console.log(data)
                 ClearCart();
-                navigate("/myorders")
+                if(data.ordertype==="ONLINEPAID"){
+                    navigate(`/self_payment/${data.selfPayment.id}`)
+                }else{
+                    toast.success("order placed successfully")
+                    navigate("/myorders")
+                }
+                
             }).catch((error)=>{
                 console.log(error)
             })
@@ -306,6 +314,12 @@ const Checkout=()=>{
                 <div class="mb-5">
                     <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Payment</span></h5>
                     <div class="bg-light p-30">
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input onChange={()=>{setOrder({...order,"ordertype":"selfpayment"})}} type="radio" class="custom-control-input" name="payment" id="selfpayment"/>
+                                <label class="custom-control-label" for="selfpayment">Self (Online) Payment</label>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="custom-control custom-radio">
                                 <input onChange={()=>{setOrder({...order,"ordertype":"postpaid"})}} type="radio" class="custom-control-input" name="payment" id="cod"/>

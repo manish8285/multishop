@@ -17,7 +17,7 @@ const AboutUs=()=>{
             </div>
             <Container>
                 <Container className="text-center mb-5">
-                <h1 className="text-primary">About Doctor Homeopathy</h1>
+                <h1 className="text-primary">About HomeoRx</h1>
                 <h4 >India’s leading digital consumer healthcare platform</h4>
                 </Container>
 
@@ -53,7 +53,7 @@ const AboutUs=()=>{
                 </Row>
 
                 <Container className="text-center mt-5">
-                    <p>Doctor homeopathy brings to you an online platform, which can be accessed for all your health needs. We are trying to make healthcare a hassle-free experience for you. Get your allopathic, ayurvedic, homeopathic medicines, vitamins & nutrition supplements and other health-related products delivered at home. Lab tests? That too in the comfort of your home. Doctor consult? Yes, we got that covered too</p>
+                    <p>HomeoRx brings to you an online platform, which can be accessed for all your health needs. We are trying to make healthcare a hassle-free experience for you. Get your ayurvedic, homeopathic medicines, vitamins & nutrition supplements and other health-related products delivered at home. Lab tests? That too in the comfort of your home. Doctor consult? Yes, we got that covered too</p>
                 </Container>
             </Container>
 

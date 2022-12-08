@@ -8,10 +8,10 @@ const Footer=()=>{
         <div className="row px-xl-5 pt-5">
             <div className="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
             <h5 className="text-secondary text-uppercase mb-4">Get In Touch</h5>
-                <p className="mb-4">Multishop | Online Doctor Consultancy and Medicine</p>
-                <p className="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Divine Health Care, Wazirabad, Sector 52, Gurgaon, Haryana, 122003</p>
+                <p className="mb-4">HomeoRx | Online Doctor Consultancy and Medicine</p>
+                <p className="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>HomeoRx (Divine Health Care), Wazirabad, Sector 52, Gurgaon, Haryana, 122003</p>
                 <p className="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>ermaanish@gmail.com</p>
-                <p className="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+91 8285482825</p>
+                <p className="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+91 9213759146</p>
             </div>
             <div className="col-lg-8 col-md-12">
                 <div className="row">
@@ -49,6 +49,9 @@ const Footer=()=>{
                                 <NavLink to={"/home/0"} className="text-secondary"><i class="fa fa-angle-right mr-2"></i>Our Products</NavLink>
                             </NavItem>
                             <NavItem style={{listStyle:"none"}}>
+                                <NavLink to={"/doctor-registration"} className="text-secondary mb-2"><i class="fa fa-angle-right mr-2"></i>Doctor Registration</NavLink>
+                            </NavItem>
+                            <NavItem style={{listStyle:"none"}}>
                                 <NavLink to={"/contactus"} className="text-secondary mb-2"><i class="fa fa-angle-right mr-2"></i>Contact Us</NavLink>
                             </NavItem>
                             <NavItem style={{listStyle:"none"}}>
@@ -78,7 +81,7 @@ const Footer=()=>{
         <div className="row border-top mx-xl-5 py-4" style={{borderCcolor: "rgba(256, 256, 256, .1) !important;"}}>
             <div className="col-md-6 px-xl-0">
                 <p class="mb-md-0 text-center text-md-left text-secondary">
-                    &copy; <a className="text-primary" href="#">Domain</a>. All Rights Reserved.
+                    &copy; <a className="text-primary" href="www.homeorx.in">HomeoRx</a>. All Rights Reserved.
                 </p>
             </div>
             <div className="col-md-6 px-xl-0 text-center text-md-right">

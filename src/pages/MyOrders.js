@@ -65,7 +65,7 @@ const MyOrders=()=>{
                 
                 page.orders.map((order,index)=>(
                     <Card className="mt-2" key={index}>
-                   <CardHeader onClick={()=>{navigate("/order-detail/"+order.orderId)}} >
+                   <CardHeader className="myHover" onClick={()=>{navigate("/order-detail/"+order.orderId)}} >
                    <i class="fas fa-gifts"></i> <b className="mr-3">{order.orderId}</b> <i class="fas fa-rupee-sign"> <b className="mr-3">{order.amount}</b></i> <i class="fas fa-calendar-check"> <b> {order.date.substring(0,10)}</b></i>   <p className="float-right"><i class="fas fa-check-circle"></i> Status : <b >{order.status[order.status?.length-1]?.status} </b> </p>
                    </CardHeader>
                    <CardBody>

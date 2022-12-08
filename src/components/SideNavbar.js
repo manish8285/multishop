@@ -44,20 +44,26 @@ const SideNavbar=()=>{
                         <>
                         
                         <NavItem className="sidebarItem">
-                        <NavLink tag={ReactLink} onClick={()=>logOut()} ><i class="fas fa-sign-out-alt"></i> Logout</NavLink>
+                        <NavLink className="p-1" tag={ReactLink} onClick={()=>logOut()} ><i class="fas fa-sign-out-alt"></i> Logout</NavLink>
                         </NavItem>
-                        <NavItem className="sidebarItem">
-                        <NavLink tag={ReactLink} to="/myorders"><i class="fas fa-box-open"></i> My Orders</NavLink>
+                        <NavItem   className="sidebarItem">
+                        <NavLink className="p-1" tag={ReactLink} to="/myorders"><i class="fas fa-box-open"></i> My Orders</NavLink>
+                        </NavItem>
+                        <NavItem   className="sidebarItem">
+                        <NavLink style={{whiteSpace:"nowrap"}} className="p-1" tag={ReactLink} to="/myappointments"><i class="fas fa-stethoscope"></i> Appointments</NavLink>
                         </NavItem>
                         </>
                     )
                 }    
 
-                <NavItem className="sidebarItem">
-                <NavLink tag={ReactLink} to="/"><i class="fas fa-home"></i> Home</NavLink>
+                <NavItem  className="sidebarItem">
+                <NavLink className="p-1" tag={ReactLink} to="/"><i class="fas fa-home"></i> Home</NavLink>
                 </NavItem>
-                <NavItem className="sidebarItem">
-                <NavLink tag={ReactLink} to="/cart"><i class="fas fa-shopping-cart"></i> Cart</NavLink>
+                <NavItem  className="sidebarItem">
+                <NavLink className="p-1" tag={ReactLink} to="/cart"><i class="fas fa-shopping-cart"></i> Cart</NavLink>
+                </NavItem>
+                <NavItem  className="sidebarItem">
+                <NavLink className="p-1" tag={ReactLink} to="/home/0"><i class="fas fa-prescription-bottle-alt"></i> Buy Medicine</NavLink>
                 </NavItem>
 
                 </Nav>

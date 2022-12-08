@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { Card, CardBody, Col, Container, Row, Table } from "reactstrap"
+import { Button, Card, CardBody, Col, Container, Row, Table } from "reactstrap"
 import Base from "../components/Base"
 import OrderStatus from "../components/OrderStatus"
-import { DRIVE_IMAGE_URL } from "../services/helper"
+import { BASE_URL, DRIVE_IMAGE_URL } from "../services/helper"
 import { GetMyOrderById, GetMyOrderStatus } from "../services/order-service"
 
 const OrderDetail=()=>{
@@ -48,7 +48,7 @@ const OrderDetail=()=>{
                
                 <Card>
                     <CardBody>
-                        <Table responsive>
+                        <Table responsive borderless style={{borderCollapse:"unset"}} >
                             <tbody>
                                 <tr>
                                     <th>Order Id</th>
@@ -62,28 +62,49 @@ const OrderDetail=()=>{
                                     <th>Order Type</th>
                                     <td>{order.ordertype}</td>
                                 </tr>
+                                {
+                                    (order.ordertype!="POSTPAID" && order.selfPayment) &&(
+                                        <tr>
+                                        <th>Paid Online
+                                        <Button style={{whiteSpace:"nowrap"}} onClick={()=>navigate("/self_payment/"+order?.selfPayment?.id)} className="ml-2 btn btn-small btn-outline-warning">{(order.selfPayment.verified)?'Verified':'Waiting for Payment Varification'}</Button>
+                                        </th>
+                                        
+                                        <td >
+                                            <img width={125} src={BASE_URL+"images/recipts/"+order.selfPayment.recipt} alt="" />
+                                            
+                                            
+                                        </td>
+
+                                    </tr>  
+                                    )
+                                }
                                 <tr>
                                     <th>Total Amount</th>
                                     <td>{order.amount}</td>
                                 </tr>
                                 <tr>
-                                    <th>Delivery Charge</th>
-                                    <td>{order.deliverycharge}</td>
+                                    <th>Address</th>
+                                    <td><p className="my-0">{order.address?.name}</p>
+                                        <p className="my-0">{order.address?.address}</p>
+                                        <p className="my-0">{order.address?.city +' ,'+ order.address?.state+' ,'+order.address?.pincode+' ,'+order.address?.mobile}</p>
+                                    </td>
                                 </tr>
+
+
                                 <tr><th colSpan={"2"}>Items</th></tr>
                                 {
                                     order.items.map((item)=>(
                                         <tr >
                                             <td>
                                             <Row style={{flexWrap:"unset"}}>
-                                            <Col md="2" sm="2" style={{width:"auto"}}>
+                                            <Col md="2" sm="2" style={{width:"auto",whiteSpace:"nowrap"}}>
                                             <img width={"90px"} src={DRIVE_IMAGE_URL+item?.product.images[0].name} alt="product image" />
                                             </Col>
-                                            <Col md="2" sm="2" style={{width:"auto"}}>
-                                            <i class="fas fa-rupee-sign"></i> {item.price}
+                                            <Col md="2" sm="2" style={{width:"auto",marginLeft:"25px",whiteSpace:"nowrap"}}>
+                                            <i class="fas fa-rupee-sign"> {item.price}</i> 
                                             </Col>
-                                            <Col md="2" sm="2" style={{width:"auto"}}>
-                                               X {item.quantity}
+                                            <Col md="2" sm="2" style={{width:"auto",whiteSpace:"nowrap"}}>
+                                                {'X '+item.quantity}
                                             </Col>
                                             </Row>
                                             </td>

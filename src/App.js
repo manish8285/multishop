@@ -26,6 +26,11 @@ import ContactUs from './pages/ContactUs';
 import AboutUs from './pages/AboutUs';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import ReturnPolicy from './pages/ReturnPolicy';
+import DoctorRegistration from './pages/DoctorRegistration';
+import Doctors from './pages/Doctors';
+import Appointment from './pages/Appointment';
+import MyAppointments from './pages/MyAppointments';
+import PayMenually from './pages/PayMenually';
 
 function App() {
   return (
@@ -43,12 +48,17 @@ function App() {
         <Route path='/forget-password' element={<ForgetPassword />} />
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/myorders' element={<MyOrders />} />
+        <Route path='/myappointments' element={<MyAppointments />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/test' element={<Testpage />} />
         <Route path='/contactus' element={<ContactUs />} />
         <Route path='/aboutus' element={<AboutUs />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
         <Route path='/return-policy' element={<ReturnPolicy />} />
+        <Route path='/doctor-registration' element={<DoctorRegistration />} />
+        <Route path='/doctors' element={<Doctors />} />
+        <Route path='/self_payment/:paymentID' element={<PayMenually />} />
+        <Route path='/appointment/:drId' element={<Appointment />} />
         <Route path='/order-detail/:orderId' element={<OrderDetail />} />
       </Routes>
     </HashRouter>

@@ -55,7 +55,7 @@ const Login=()=>{
                     <div className="card mt-2">
                         <div className="card-body">
                             <Container className="text-center">
-                            <h4 className="text-primary">MULTISHOP | LOGIN</h4>
+                            <h4 className="text-primary">HomeoRx | LOGIN</h4>
                             </Container>
                         <Form className="">
                         <FormFeedback invalid>

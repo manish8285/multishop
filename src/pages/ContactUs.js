@@ -88,9 +88,9 @@ const ContactUs=()=>{
                     frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                 </div>
                 <div class="bg-light p-30 mb-3">
-                    <p className="mb-2"><i className="fa fa-map-marker-alt text-primary mr-3"></i>Divine Health Care, Wazirabad, Sector 52, Gurgaon, Haryana 122003</p>
+                    <p className="mb-2"><i className="fa fa-map-marker-alt text-primary mr-3"></i>HomeoRx (Divine Health Care), Wazirabad, Sector 52, Gurgaon, Haryana 122003</p>
                     <p className="mb-2"><i className="fa fa-envelope text-primary mr-3"></i>ermaanish@gmail.com</p>
-                    <p className="mb-2"><i className="fa fa-phone-alt text-primary mr-3"></i>+91 8285482825</p>
+                    <p className="mb-2"><i className="fa fa-phone-alt text-primary mr-3"></i>+91 8587823264</p>
                 </div>
             </div>
         </div>

@@ -33,13 +33,13 @@ const AllProducts=()=>{
     }
 
     useEffect(()=>{
-        console.log(currentPage)
+       // console.log(currentPage)
         changePage();
     },[currentPage])
 
     const searchForProduct=(key)=>{
         searchProduct(key).then(response=>{
-            console.log(response)
+            //console.log(response)
             setPage(response)
 
         }).catch(error=>{
@@ -54,8 +54,8 @@ const AllProducts=()=>{
 
     const changePage=(pageSize=3)=>{
         GetAllProducts(currentPage,pageSize).then(response=>{
-            console.log("fetching products ...")
-            console.log(response)
+            //console.log("fetching products ...")
+            //console.log(response)
             setPage({...page,
                 "pageNumber":response.pageNumber,
                 "lastPage":response.lastPage,
@@ -140,7 +140,7 @@ const AllProducts=()=>{
                         dataLength={page.totalElements}
                         hasMore={!page.lastPage}
                         next={()=>{setCurrentPage(currentPage+1)}}
-                        endMessage={    <h1 style={{ textAlign: 'center' }}>...End of Page...</h1>    }
+                        endMessage={    <p style={{ textAlign: 'center' }}>...no more products...</p>    }
                         className="row"
                         
                     >

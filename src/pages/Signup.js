@@ -110,7 +110,7 @@ const Signup=()=>{
                 <div className="card">
             <div className="card-body">
                 <Container className="text-center">
-                    <h4 className="text-primary">MULTISHOP | SIGNUP</h4>
+                    <h4 className="text-primary">HomeoRx | SIGNUP</h4>
                 </Container>
                 <Form >
   

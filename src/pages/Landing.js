@@ -104,7 +104,7 @@ const Landing=()=>{
                                 <div class="p-3" style={{"max-width":"700px;"}}>
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Beauti Products</h1>
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Buy Homoeopathic natural personal care products</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" onClick={()=>navigate("/category/3")} >Shop Now</a>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" onClick={()=>navigate("/home/facewash")} >Shop Now</a>
                                 </div>
                             </div>
                         </div>
@@ -202,7 +202,7 @@ const Landing=()=>{
                 </a>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" onClick={()=>{navigate("/category/2")}}>
+                <a class="text-decoration-none" onClick={()=>{navigate("/home/Reckweg")}}>
                     <div class="cat-item img-zoom d-flex align-items-center mb-4">
                         <div class="overflow-hidden" style={{width: "100px", height: "100px"}}>
                             <img class="img-fluid" src="img/r18.webp" alt="" />
@@ -255,7 +255,7 @@ const Landing=()=>{
                     <div class="text-center py-4" onClick={()=>navigate("/home/alfalfa")} >
                         <a class="h6 text-decoration-none text-truncate" >Homeopathic Energy Tonic</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>₹125.00</h5><h6 class="text-muted ml-2"><del>₹150.00</del></h6>
+                            {/* <h5>₹125.00</h5><h6 class="text-muted ml-2"><del>₹150.00</del></h6> */}
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
@@ -263,7 +263,7 @@ const Landing=()=>{
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
+                            <small>(41)</small>
                         </div>
                     </div>
                 </div>
@@ -276,7 +276,7 @@ const Landing=()=>{
                     <div class="text-center py-4" onClick={()=>navigate("/home/liver")} >
                         <a class="h6 text-decoration-none text-truncate">Homeopathic Liver Tonic</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>₹110.00</h5><h6 class="text-muted ml-2"><del>₹150.00</del></h6>
+                            {/* <h5>₹110.00</h5><h6 class="text-muted ml-2"><del>₹150.00</del></h6> */}
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
@@ -284,7 +284,7 @@ const Landing=()=>{
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star-half-alt text-primary mr-1"></small>
-                            <small>(99)</small>
+                            <small>(92)</small>
                         </div>
                     </div>
                 </div>
@@ -297,7 +297,7 @@ const Landing=()=>{
                     <div class="text-center py-4" onClick={()=>navigate("/home/cough")} >
                         <a class="h6 text-decoration-none text-truncate" >Homeopathic Cough Syrup</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>₹55.00</h5><h6 class="text-muted ml-2"><del>₹100.00</del></h6>
+                            {/* <h5>₹55.00</h5><h6 class="text-muted ml-2"><del>₹100.00</del></h6> */}
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
@@ -305,7 +305,7 @@ const Landing=()=>{
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star-half-alt text-primary mr-1"></small>
                             <small class="far fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
+                            <small>(73)</small>
                         </div>
                     </div>
                 </div>
@@ -318,7 +318,7 @@ const Landing=()=>{
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" href="">Homeopathic Hair Oil</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>₹123.00</h5><h6 class="text-muted ml-2"><del>₹123.00</del></h6>
+                            {/* <h5>₹123.00</h5><h6 class="text-muted ml-2"><del>₹123.00</del></h6> */}
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
@@ -326,7 +326,7 @@ const Landing=()=>{
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star-half-alt text-primary mr-1"></small>
-                            <small>(99)</small>
+                            <small>(88)</small>
                         </div>
                     </div>
                 </div>
@@ -339,7 +339,7 @@ const Landing=()=>{
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" onClick={()=>navigate("/home/toothpaste")}>Homoeopathic Toothpaste</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>₹123.00</h5><h6 class="text-muted ml-2"><del>₹123.00</del></h6>
+                            {/* <h5>₹123.00</h5><h6 class="text-muted ml-2"><del>₹123.00</del></h6> */}
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
@@ -347,7 +347,7 @@ const Landing=()=>{
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
+                            <small>(74)</small>
                         </div>
                     </div>
                 </div>
@@ -361,7 +361,7 @@ const Landing=()=>{
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" onClick={()=>navigate("/home/cream")}>Homoeopathic Cream</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>₹123.00</h5><h6 class="text-muted ml-2"><del>₹123.00</del></h6>
+                            {/* <h5>₹123.00</h5><h6 class="text-muted ml-2"><del>₹123.00</del></h6> */}
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
@@ -369,7 +369,7 @@ const Landing=()=>{
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="fa fa-star-half-alt text-primary mr-1"></small>
                             <small class="far fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
+                            <small>(61)</small>
                         </div>
                     </div>
                 </div>
@@ -382,7 +382,7 @@ const Landing=()=>{
                     <div class="text-center py-4">
                         <a class="h6 text-decoration-none text-truncate" onClick={()=>navigate("/home/facewash")}>Homoeopathic Facewash</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>₹123.00</h5><h6 class="text-muted ml-2"><del>₹123.00</del></h6>
+                            {/* <h5>₹123.00</h5><h6 class="text-muted ml-2"><del>₹123.00</del></h6> */}
                         </div>
                         <div class="d-flex align-items-center justify-content-center mb-1">
                             <small class="fa fa-star text-primary mr-1"></small>
@@ -390,7 +390,7 @@ const Landing=()=>{
                             <small class="fa fa-star text-primary mr-1"></small>
                             <small class="far fa-star text-primary mr-1"></small>
                             <small class="far fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
+                            <small>(58)</small>
                         </div>
                     </div>
                 </div>
@@ -408,7 +408,7 @@ const Landing=()=>{
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">Save 90%</h6>
                         <h3 class="text-white mb-3">Doctor Cosultancy at Just ₹200</h3>
-                        <a disabled href="" class="btn btn-primary">Contact Now</a>
+                        <a disabled onClick={()=>navigate("/doctors")} class="btn btn-primary">Contact Now</a>
                     </div>
                 </div>
             </div>

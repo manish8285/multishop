@@ -7,7 +7,7 @@ const PrivacyPolicy=()=>{
                 <Container className="text-center">
                 <h4>PRIVACY POLICY</h4>
                 </Container>
-                <p>Doctor Homeopathy Care Solutions ("Divine Health Care" or "we") takes the privacy of your information seriously. This privacy notice ("Privacy Notice") describes the types of personal information we collect from you through our website (including sub-domains and microsites) and mobile applications. It also describes the purposes for which we collect that personal information, the other parties with whom we may share it and the measures we take to protect the security of your data. It also tells you about your rights and choices with respect to your personal information, and how you can contact us about our privacy practices.
+                <p>HomeoRx  ("Divine Health Care" or "we") takes the privacy of your information seriously. This privacy notice ("Privacy Notice") describes the types of personal information we collect from you through our website (including sub-domains and microsites) and mobile applications. It also describes the purposes for which we collect that personal information, the other parties with whom we may share it and the measures we take to protect the security of your data. It also tells you about your rights and choices with respect to your personal information, and how you can contact us about our privacy practices.
 You are advised to carefully read this Privacy Notice before using or availing any of our products and/or services.</p>
 
                 <h5>DEFINITIONS</h5>
@@ -30,7 +30,7 @@ You are advised to carefully read this Privacy Notice before using or availing a
                 <h5>User or you</h5>
                 <p>the natural person who accesses our stores, website or mobile application.</p>
                 <h5>2. WHAT DATA DO WE COLLECT ABOUT YOU</h5>
-                <p>Doctor Homeopathy collects Data for various purposes set out in this Privacy Notice. This Data includes, without limitation, the following categories:</p>
+                <p>HomeoRx collects Data for various purposes set out in this Privacy Notice. This Data includes, without limitation, the following categories:</p>
             
                 <li>Contact information: first and last name, email address, postal address, country, employer, phone number and other similar contact data.</li>
                 <li>Financial information: payment instrument information, transactions, transaction history, preferences, method, mode and manner of payment, spending pattern or trends, and other similar data.</li>
@@ -53,7 +53,7 @@ You are advised to carefully read this Privacy Notice before using or availing a
                 <li>You can make choices about our collection and use of your Data. For example, you may want to access, edit or remove your Data on our website or mobile application. When you are asked to provide Data, you may decline</li>
 
                 <h5>4. DATA SHARED BY YOU</h5>
-                <p>Doctor Homeopathy may collect your Data in several ways from your use of our stores, website or mobile application. For instance:</p>
+                <p>HomeoRx may collect your Data in several ways from your use of our stores, website or mobile application. For instance:</p>
                 <li>when you register with us to receive our products and/or services;</li>
                 <li>when you conduct a transaction with us or attempt a transaction at our stores, on our website or mobile application;</li>
                 <li>when you complete surveys conducted by or for us;</li>
@@ -63,7 +63,7 @@ You are advised to carefully read this Privacy Notice before using or availing a
 
                 <h5>5. DATA THAT IS COLLECTED AUTOMATICALLY</h5>
                 <li>We automatically collect some information when you visit our website or use our mobile application. This information helps us to make improvements to our content and navigation. The information collected automatically includes your IP address.</li>
-                <li>Our web servers or affiliates who provide analytics and performance enhancement services collect IP addresses, operating system details, browsing details, device details and language settings. This information is aggregated to measure the number of visits, average time spent on the site, pages viewed and similar information. Tata 1mg uses this information to measure the site usage, improve content and to ensure safety and security, as well as enhance performance of our website or mobile application.</li>
+                <li>Our web servers or affiliates who provide analytics and performance enhancement services collect IP addresses, operating system details, browsing details, device details and language settings. This information is aggregated to measure the number of visits, average time spent on the site, pages viewed and similar information. HomeoRx uses this information to measure the site usage, improve content and to ensure safety and security, as well as enhance performance of our website or mobile application.</li>
                 <li>We may collect your Data automatically via Cookies, pixels and similar technologies in line with settings on your browser. For more information about Cookies, please see the section below, titled "Cookies".</li>
 
                 <h5>WHERE WE STORE DATA</h5>

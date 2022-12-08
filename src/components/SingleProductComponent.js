@@ -71,8 +71,14 @@ const SingleProductComponent=()=>{
                                 </button>
                             </div>
                         </div>
-                        <button disabled={added_to_card} onClick={(event)=>{AddToCart(product);setAdded_to_cart(true)}} class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                            Cart</button>
+                        {
+                            (!added_to_card) &&(<button disabled={added_to_card} onClick={(event)=>{AddToCart(product);setAdded_to_cart(true)}} class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                            Cart</button>)
+                        }
+                        {
+                           (added_to_card) && ( <button  onClick={(event)=>{navigate("/cart")}} class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Go To
+                            Cart</button>)
+                        }
                     </div>
                     <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Share on:</strong>
@@ -100,7 +106,7 @@ const SingleProductComponent=()=>{
                             </tr>
                             <tr>
                                 <th>Category</th>
-                                <td>{product.categoryId}</td>
+                                <td>{product.category?.name}</td>
                             </tr>
                             <tr>
                                 <th>Brand</th>
@@ -152,12 +158,12 @@ const SingleProductComponent=()=>{
                         </div>
                         <div class="tab-pane fade" id="tab-pane-2">
                             <h4 class="mb-3">Product Description</h4>
-                            <p>{product.description}</p>
+                            <div>{product.description}</div>
                                 <div class="row">
         
                             </div>
 
-                            <h4>Tags</h4>
+                            <h4 className="mt-2">Tags</h4>
                             <br></br>
                             <small>{product.tags}</small>
                         </div>
