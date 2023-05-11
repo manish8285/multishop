@@ -2,9 +2,10 @@ import axios from 'axios'
 import { getToken } from '../auth'
 
 //export const BASE_URL = "https://multimshop.herokuapp.com/api/v1/"
-export const BASE_URL = "http://localhost:8080/api/v1/"
+//export const BASE_URL = "http://localhost:9090/api/v1/"
 
-//export const BASE_URL = "http://34.131.250.126:8080/api/v1/"
+export const BASE_URL = "https://familydr.shop/api/v1/"
+//export const BASE_URL = "http://localhost:8080/api/v1/"
 
 export const DRIVE_IMAGE_URL = "https://drive.google.com/uc?export=view&id="
 

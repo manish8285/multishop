@@ -2,12 +2,17 @@ import { useEffect, useState } from "react"
 import {useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 import { Form,Card, CardBody, Col, Container, FormGroup, Input, Label, Button } from "reactstrap"
-import { getCurrentUserDetail } from "../auth"
+import { getCurrentUserDetail, isLogedIn } from "../auth"
 import Base from "../components/Base"
 import { createAppointment, getDoctor } from "../services/doctor-service"
 
 const Appointment=()=>{
     let navigate=useNavigate()
+
+   
+
+
+
     const {drId} = useParams()
 
     const [doctor,setDoctor] = useState({})
@@ -59,10 +64,12 @@ const Appointment=()=>{
     }
 
     useEffect(()=>{
+
+        
         
         getDoctor(drId).then(data=>{
             //console.log("doctor = ")
-           // console.log(data)
+           console.log(data)
             setDoctor(data)
         }).catch(error=>console.log(error))
 
@@ -96,7 +103,8 @@ const Appointment=()=>{
         <Base>
             <Container>
                 <Container className="text-center mt-2 bg-white">
-                    <h1 className="text-primary">Book Appointment with Dr. {doctor?.user?.name} {!(doctor.verified)&&(<i class='fas fa-check-circle' style={{color:"blue",fontSize:"20px"}}></i>)} </h1>
+                    <h1>Online doctor consultation with qualified doctors</h1>
+                    <h1 className="text-primary">Book Appointment with Dr. {doctor?.name} {!(doctor.verified)&&(<i class='fas fa-check-circle' style={{color:"blue",fontSize:"20px"}}></i>)} </h1>
                     <p>{doctor.specialization?.name} , {doctor.address?.city?.toUpperCase()}</p>
                 </Container>
                 <Card>
@@ -130,6 +138,16 @@ const Appointment=()=>{
                             <Label for="mobile" sm={2}> Mobile</Label>
                             <Col sm={3}>
                             <Input onChange={(event)=>updateAppointment(event)} id="mobile" value={appointment.mobile} name="mobile" placeholder="Mobile No" type="text"/>
+                            </Col>
+                        </FormGroup>
+                        <FormGroup row>
+                            <Label for="mobile" sm={2}> mode of consultation</Label>
+                            <Col sm={3}>
+                            <Input onChange={(event)=>updateAppointment(event)} id="mode" value={appointment.mobile} name="mode"  type="select">
+                                <option>Chat</option>
+                                <option>Audio</option>
+                                <option>Video</option>
+                            </Input>
                             </Col>
                         </FormGroup>
                         <Container className="text-center">

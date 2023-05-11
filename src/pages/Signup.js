@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 import { Navigate, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import { Container, Form, FormFeedback, FormGroup, FormText, Input, Label } from "reactstrap"
+import { Button, Container, Form, FormFeedback, FormGroup, FormText, Input, Label } from "reactstrap"
 import { doLogin } from "../auth"
 import Base from "../components/Base"
-import { signUp, verifyEmailUnique } from "../services/user_service"
+import { sendMobileOTP, signUp, verifyEmailUnique, verifyOTP } from "../services/user_service"
 
 const Signup=()=>{
 
@@ -12,16 +12,17 @@ const Signup=()=>{
 
     const [userdata,setUserdata]=useState({
         "name":"",
-        "email":"",
+        "mobile":"",
         "password":"",
-        "about":"",
+        "otp":"",
     })
 
     const [valid,setValid]=useState({
         "name":false,
         "email":false,
         "password":false,
-        "about":false,
+        "otp":false,
+        "mobile":false,
     })
 
     const [errors,setErrors] = useState({})
@@ -32,6 +33,36 @@ const Signup=()=>{
             [event.target.id]:event.target.value
         })
     }
+
+    const nameNext=()=>{
+        if(valid.name){
+            document.querySelector("#namebox").style.display="none"
+            document.querySelector("#mobilebox").style.display="block"
+        }
+        
+    }
+    const mobileNext=()=>{
+        checkMobile()
+        if(valid.mobile){
+            sendMobileOTP(userdata.mobile).then(data=>{
+                document.querySelector("#mobilebox").style.display="none"
+                document.querySelector("#otpbox").style.display="block"
+                toast.info(data)
+            }).catch(error=>{
+                toast.error(error)
+            })
+        }
+        
+    }
+    const otpNext=()=>{
+        if(valid.otp){
+            document.querySelector("#otpbox").style.display="none"
+            document.querySelector("#passwordbox").style.display="block"
+            document.querySelector("#submitbox").style.display="block"
+        }
+        
+    }
+
 
     const checkName=()=>{
         if(userdata.name?.length>=3){
@@ -53,28 +84,54 @@ const Signup=()=>{
     }
 
     const checkEmail=()=>{
-        setValid({...valid,"email":false})
-        setErrors({...errors,"email":""})
+        
         //console.log("email ="+userdata.email)
-        if(userdata.email.includes("@") && userdata.email.includes(".com")){
-        verifyEmailUnique(userdata.email).then(data=>{
-            setValid({...valid,"email":true})
-            //setErrors({...errors,"email":data})
-            console.log(data)
-        }).catch(error=>{
-           console.log(error)
+        if(userdata.email.length==10){
             setValid({...valid,"email":false})
-            setErrors({...errors,"email":error.response.data})
-        })
-    }else{
-        setErrors({...errors,"email":"Please Enter a valid email"})
+            setErrors({...errors,"email":""})
+
+        }else{
+            setErrors({...errors,"email":"Please Enter a valid Mobile No"})
+        }
     }
+
+    const checkOTP=()=>{
+
+        verifyOTP(userdata.otp).then(data=>{
+            setValid({...valid,"otp":true})
+            setErrors({...errors,"otp":""})
+        }).catch(error=>{
+            setValid({...valid,"otp":false})
+            setErrors({...errors,"otp":"Please Enter a valid OTP"})
+        })
+    }
+
+
+    const checkMobile=()=>{
+        
+        //console.log("email ="+userdata.email)
+        if(userdata.mobile.length==10){
+            verifyEmailUnique(userdata.mobile).then(data=>{
+                console.log(data)
+                setValid({...valid,"mobile":true})
+                setErrors({...errors,"mobile":""})
+            }).catch(error=>{
+               console.log(error)
+                toast.error(error.response.data)
+                setErrors({...errors,"email":error})
+                setValid({...valid,"mobile":false})
+            })
+            
+        }else{
+            setErrors({...errors,"email":"Please Enter a valid Mobile No"})
+            setValid({...valid,"mobile":false})
+        }
     }
 
     const attemptSignup=()=>{
         
-        if(valid.name==true && valid.password==true && valid.email==true){
-        signUp(userdata).then((data)=>{
+        if(valid.name==true && valid.password==true && valid.otp==true){
+        signUp(userdata,userdata.otp).then((data)=>{
             toast.success("You have registered successfully !!!")
            // window.URL="/login"
            //window.location.href="/#/login"
@@ -89,18 +146,16 @@ const Signup=()=>{
             setErrors(error.response.data)
         })
     }else{
-        checkEmail()
+        checkMobile()
         checkName()
         checkPassword()
         toast.error("Please correct all the information first")
         return
     }
-    
-   //navigate("/login")
+
     }
-    useEffect(()=>{
-        
-    },[])
+
+
     return (
 
         <Base>
@@ -110,31 +165,42 @@ const Signup=()=>{
                 <div className="card">
             <div className="card-body">
                 <Container className="text-center">
-                    <h4 className="text-primary">HomeoRx | SIGNUP</h4>
+                    <h4 className="text-primary myHover" onClick={()=>navigate("/")}>HomeoRx | SIGNUP</h4>
                 </Container>
                 <Form >
   
-                <FormGroup>
+                <FormGroup id="namebox">
                     <Label for="name">
-                    Enter your Full Name
+                    Enter your Name
                     </Label>
                     <Input invalid={errors?.name?true:false} onBlur={()=>checkName()} valid={valid.name} name="name" required type="text" id="name" value={userdata.name} onChange={(event)=>updateUserData(event)} />
                     <FormFeedback>
                             {errors?.name}
                     </FormFeedback>
+                    <button type="button" className="btn btn-primary float-right mt-1" onClick={()=>nameNext()} >Next</button>
                 </FormGroup>
 
-                <FormGroup>
-                    <Label for="email">
-                    Enter your Email
+                <FormGroup id="mobilebox" style={{display:"none"}}>
+                    <Label for="mobile">
+                    Enter your Mobile
                     </Label>
-                    <Input invalid={errors?.email?true:false} valid={valid.email} onBlur={()=>checkEmail()} required  name="email" type="email" id="email" value={userdata.email} onChange={(event)=>updateUserData(event)} />
+                    <Input invalid={errors?.mobile?true:false} valid={valid.mobile} onBlur={()=>checkMobile()} required  name="mobile" type="text" id="mobile" value={userdata.mobile} onChange={(event)=>{updateUserData(event)}} />
                     <FormFeedback>
-                            {errors?.email}
+                            {errors?.mobile}
                     </FormFeedback>
+                    <button type="button" className="btn btn-primary float-right mt-1" onClick={()=>mobileNext()} >Next</button>
                 </FormGroup>
 
-                <FormGroup>
+                <FormGroup id="otpbox" style={{display:"none"}}>
+                            <Label>Enter OTP</Label>
+                            <Input invalid={errors?.otp?true:false} valid={valid.otp} onBlur={()=>checkOTP()} type="text" placeholder={`Enter OTP sent on Mobile ${userdata.mobile}`} id="otp" name="otp"  value={userdata.otp} onChange={(event)=>updateUserData(event)}  />
+                            <FormFeedback>
+                                
+                            </FormFeedback>
+                            <button type="button" className="btn btn-primary float-right mt-1" onClick={()=>otpNext()} >Next</button>
+                </FormGroup>
+
+                <FormGroup id="passwordbox" style={{display:"none"}}>
                     <Label for="password">
                     Create New Password
                     </Label>
@@ -144,11 +210,11 @@ const Signup=()=>{
                     </FormFeedback>
                 </FormGroup>
 
-                <Container className="text-center">
+                <Container style={{display:"none"}} id="submitbox" className="text-center">
                 <button type="button" className="btn btn-primary" onClick={()=>attemptSignup()}>Signup</button>
                 </Container>
  
-</Form>
+            </Form>
                  <a className="text-dark" onClick={()=>{navigate("/login")}} >Already member? Login</a> 
                 {/* <Navigate to="/login">Already member? Login</Navigate> */}
             </div>
@@ -158,6 +224,7 @@ const Signup=()=>{
             </Container>
         </Base>
     )
+
 
 }
 

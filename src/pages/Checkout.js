@@ -6,12 +6,33 @@ import { getCurrentUserDetail, isLogedIn } from "../auth"
 import Base from "../components/Base"
 import { ClearCart, GetCart } from "../services/cart-service"
 import { privateAxios } from "../services/helper"
-import { GetMyDeliveryCharge, PlaceOrderRequest, SaveCustomerAddress } from "../services/order-service"
+import { CalculateShippingCharge, GetMyDeliveryCharge, PlaceOrderRequest, SaveCustomerAddress } from "../services/order-service"
+import { requestOrderPayment } from "../services/payment-service"
 import { login,getCutomer } from "../services/user_service"
 
 const Checkout=()=>{
     let navigate =useNavigate()
+
+    const [paymentDetail,setPaymentDetail]=useState({
+        productInfo:"",
+        firstname:"",
+        email:'',
+        phone:'',
+        amount:'',
+        surl:'',
+        furl:'',
+        key:'',
+        hash:'',
+        txnid:"",
+    })
     //if not login ask for login
+
+    const updatePaymentDetail=(event)=>{
+        setPaymentDetail({
+            ...paymentDetail,
+            [event.target.id]:event.target.value
+        })
+    }
     
     useEffect(()=>{
         if(!isLogedIn()){
@@ -108,8 +129,8 @@ const Checkout=()=>{
         const pincode=order?.address?.pincode
         console.log("pincode ="+pincode)
         if(pincode != undefined && pincode != ""){
-            GetMyDeliveryCharge(pincode).then(price=>{
-                setShipping(price);
+            CalculateShippingCharge(pincode).then(data=>{
+                setShipping(data.freight_charge);
             }).catch(error=>{
                 console.log(error)
             })
@@ -118,8 +139,8 @@ const Checkout=()=>{
 
     const shippingCharge=(pincode)=>{
         if(pincode.toString().length>=6){
-            GetMyDeliveryCharge(pincode).then(price=>{
-                setShipping(price)
+            CalculateShippingCharge(pincode).then(price=>{
+                setShipping(price.freight_charge)
             }).catch(error=>{
                 console.log(error)
             })
@@ -170,6 +191,20 @@ const Checkout=()=>{
             console.log(error)
         })
     }
+    const requestPayment=(orderId)=>{
+        requestOrderPayment(orderId).then(data=>{
+            console.log(data)
+            setPaymentDetail(data)
+            document.querySelector("#btn-confirm").style.display="none"
+            document.querySelector("#btn-submit").style.display="block"
+
+           // psumbit()
+        }).catch(error=>{
+            console.log(error)
+        })
+    }
+
+
 
      const placeOrder=()=>{
             if(order?.address?.name==''){
@@ -181,12 +216,14 @@ const Checkout=()=>{
                 return
             }
 
+            toast.info("Please wait while processing your order...");
             PlaceOrderRequest(order).then((data)=>{
                // toast.success("Order has been placed successfully")
                 console.log(data)
                 ClearCart();
-                if(data.ordertype==="ONLINEPAID"){
-                    navigate(`/self_payment/${data.selfPayment.id}`)
+                if(data.ordertype==="PREPAID" ){
+                    //navigate(`/self_payment/${data.selfPayment.id}`)
+                    requestPayment(data.orderId)
                 }else{
                     toast.success("order placed successfully")
                     navigate("/myorders")
@@ -316,8 +353,8 @@ const Checkout=()=>{
                     <div class="bg-light p-30">
                         <div class="form-group">
                             <div class="custom-control custom-radio">
-                                <input onChange={()=>{setOrder({...order,"ordertype":"selfpayment"})}} type="radio" class="custom-control-input" name="payment" id="selfpayment"/>
-                                <label class="custom-control-label" for="selfpayment">Self (Online) Payment</label>
+                                <input onChange={()=>{setOrder({...order,"ordertype":"PREPAID"})}} type="radio" class="custom-control-input" name="payment" id="selfpayment"/>
+                                <label class="custom-control-label" for="selfpayment">PREPAID</label>
                             </div>
                         </div>
                         <div class="form-group">
@@ -328,7 +365,24 @@ const Checkout=()=>{
                         </div>
 
                         
-                        <button onClick={()=>placeOrder()} class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
+                        <button onClick={()=>placeOrder()} id="btn-confirm" class="btn btn-block btn-primary font-weight-bold py-3">Place Order</button>
+                        <form action="https://secure.payu.in/_payment" name="payuform" method="POST">
+
+                                        <Input type="text" className="form-control" value={paymentDetail.productInfo} onChange={(event)=>updatePaymentDetail(event)} id="productInfo" name="productinfo"  hidden/>
+                                        <Input type="text" className="form-control" id="firstname" value={paymentDetail.firstname} onChange={(event)=>updatePaymentDetail(event)} name="firstname" hidden />
+                                        <Input type="email" className="form-control" id="email" value={paymentDetail.email} onChange={(event)=>updatePaymentDetail(event)} name="email" hidden />
+                                        <Input type="number" className="form-control" id="phone" value={paymentDetail.phone} onChange={(event)=>updatePaymentDetail(event)} name="phone" hidden />
+                                        <Input type="number" className="form-control" id="amount" value={paymentDetail.amount} onChange={(event)=>updatePaymentDetail(event)} name="amount" hidden  />
+
+                                    <Input type="textarea" name="surl" id="surl" ng-model="surl" value={paymentDetail.surl} rows="2" cols="2" hidden />
+                                    <Input type="textarea" name="furl" id="furl"  rows="2" cols="2" value={paymentDetail.furl} hidden />
+                                    <Input type="textarea" name="key" id="key"  rows="2" cols="2" value={paymentDetail.key} hidden />
+                                    <Input type="textarea" name="hash" id="hash"  rows="2"  cols="2" value={paymentDetail.hash} hidden />
+                                    <Input type="textarea" name="txnid" id="txnid"  rows="2" cols="2" value={paymentDetail.txnid} hidden />
+                                    <Input type="textarea" name="service_provider" id="service_provider" rows="2" cols="2" hidden />
+                                    {/* <button type="button" class="btn btn-primary" id="btn-confirm" onClick={()=>requestPayment()} >Confirm Payment</button> */}
+                                    <button type="submit" class="btn btn-danger" style={{display:"none"}} id="btn-submit" >Continue Payment</button>
+                                </form>
                     </div>
                 </div>
             </div>

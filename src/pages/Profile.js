@@ -144,12 +144,16 @@ const Profile=()=>{
                                 <td><Input type="text" id="name" onChange={(event)=>setUser({...user,"name":event.target.value})} value={user.name} /></td>
                             </tr>
                             <tr>
-                                <th>Mobile No :</th>
-                                <td><Input type="number" onChange={(event)=>setUser({...user,"mobile":event.target.value})} value={user.mobile} /></td>
+                                <th>Email :</th>
+                                <td><Input type="email" id="email" onChange={(event)=>setUser({...user,"email":event.target.value})} value={user.email} /></td>
                             </tr>
+                             <tr>
+                                <th>Mobile No :</th>
+                                <td><Input disabled type="number" onChange={(event)=>setUser({...user,"mobile":event.target.value})} value={user.mobile} /></td>
+                            </tr> 
                             <tr>
                                 <th>Gender :</th>
-                                <td><Input defaultValue={"MALE"} onChange={()=>updateGender()} id="gender"  className="form-control" type="select" >
+                                <td><Input onChange={(event)=>setUser({...user,"gender":event.target.value})} id="gender"  className="form-control" type="select" >
                                 <option selected > ---Select--- </option>
                                     <option value="MALE">MALE</option>
                                     <option  value="FEMALE" >FEMALE</option>

@@ -3,12 +3,16 @@ import Base from "../components/Base"
 import { AddToCart, GetCart, RemoveFromCart, SubstractFromCart } from "../services/cart-service"
 import { BASE_URL, DRIVE_IMAGE_URL } from "../services/helper"
 import { Navigate, useNavigate } from "react-router-dom";
-import { GetMyDeliveryCharge } from "../services/order-service";
+import { CalculateShippingCharge, GetMyDeliveryCharge } from "../services/order-service";
 
 const Cart=()=>{
     const [mycart,setMycart]= useState(GetCart())
     const [subtotal,setSubtotal] = useState(0)
-    const [shipping,setShipping] = useState(0)
+    const [shipping,setShipping] = useState({
+        freight_charge:0,
+        etd:"",
+        estimated_delivery_days:""
+    })
 
     let navigate = useNavigate()
 
@@ -21,15 +25,15 @@ const Cart=()=>{
         mycart.cartlist.map((item)=>{
         total=total+item.product.price*item.quantity
         })
-        setSubtotal(total+shipping)
+        setSubtotal(total+shipping.freight_charge)
     }
 
     const calculateDeliveryCharge=()=>{
         const pincode=document.getElementById("pincode").value
         if(pincode!=""){
             console.log(pincode)
-            GetMyDeliveryCharge(pincode).then(price=>{
-                setShipping(price);
+            CalculateShippingCharge(pincode).then(data=>{
+                setShipping(data);
             }).catch(error=>{
                 console.log(error)
             })
@@ -117,7 +121,9 @@ const Cart=()=>{
                         {/* <div class="input-group-append">
                             <button onClick={()=>calculateDeliveryCharge()} class="btn btn-primary">Apply</button>
                         </div> */}
+                        
                     </div>
+                    <p className="text-success my-2">expected delivery date {shipping.etd}</p>
                 </form>
                 <h5 className="section-title position-relative text-uppercase mb-3"><span className="bg-secondary pr-3">Cart Summary</span></h5>
                 <div className="bg-light p-30 mb-5">
@@ -128,13 +134,13 @@ const Cart=()=>{
                         </div>
                         <div className="d-flex justify-content-between">
                             <h6 className="font-weight-medium">Shipping</h6>
-                            <h6 className="font-weight-medium"> ₹{shipping}</h6>
+                            <h6 className="font-weight-medium"> ₹{shipping.freight_charge}</h6>
                         </div>
                     </div>
                     <div className="pt-2">
                         <div className="d-flex justify-content-between mt-2">
                             <h5>Total</h5>
-                            <h5>₹{shipping+subtotal}</h5>
+                            <h5>₹{shipping.freight_charge+subtotal}</h5>
                         </div>
                         <button onClick={()=>navigate("/checkout")} className="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
                     </div>

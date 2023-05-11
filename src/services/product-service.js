@@ -1,6 +1,6 @@
 import {BASE_URL, myAxios} from './helper'
 
-export const GetAllProducts=(pageNumber=0,pageSize=5)=>{
+export const GetAllProducts=(pageNumber,pageSize)=>{
     const url = BASE_URL+`products/?pageNumber=${pageNumber}&pageSize=${pageSize}`
     return myAxios.get(url).then(response=>response.data)    
 }

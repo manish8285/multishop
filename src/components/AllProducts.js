@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
 import { AddToCart, GetCart } from "../services/cart-service";
-import { GetAllProducts, searchProduct } from "../services/product-service";
+import { getAllCategories, GetAllProducts, searchProduct } from "../services/product-service";
 import Product from "./Product";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { FormGroup, Input, Nav, Navbar, NavbarBrand } from "reactstrap";
+import { Container, FormGroup, Input, Nav, Navbar, NavbarBrand } from "reactstrap";
 
 const AllProducts=()=>{
+    const [categories,setCategories]=useState([])
     const [page,setPage] = useState({
         "totalPages":'',
         "pageSize":'',
@@ -17,9 +18,28 @@ const AllProducts=()=>{
 
     })
 
+    useEffect(()=>{
+        getAllCategories().then(data=>{
+            setCategories(data)
+            console.log(categories)
+        },[])
+    },[])
+    useEffect(()=>{
+        getAllCategories().then(data=>{
+            //setCategories(data)
+            console.log(categories)
+        },[])
+    },[categories])
+
+    const goToCategory=()=>{
+       const catId= document.getElementById("category").value
+        navigate("/category/"+catId)
+    }
+
+
     const {q}=useParams()
    // console.log("q = "+q)
-    const [currentPage,setCurrentPage]= useState(0)
+    var [currentPage,setCurrentPage]= useState(0)
 
     let navigate = useNavigate()
 
@@ -33,8 +53,8 @@ const AllProducts=()=>{
     }
 
     useEffect(()=>{
-       // console.log(currentPage)
-        changePage();
+       //console.log("current page ="+currentPage)
+        changePage(currentPage);
     },[currentPage])
 
     const searchForProduct=(key)=>{
@@ -52,8 +72,8 @@ const AllProducts=()=>{
         searchForProduct(q)
     }
 
-    const changePage=(pageSize=3)=>{
-        GetAllProducts(currentPage,pageSize).then(response=>{
+    const changePage=(currentPage)=>{
+        GetAllProducts(currentPage,page.pageSize).then(response=>{
             //console.log("fetching products ...")
             //console.log(response)
             setPage({...page,
@@ -64,36 +84,24 @@ const AllProducts=()=>{
         }).catch(error=>{
             console.log(error)
         })
+        GetAllProducts(3,5).then(data=>console.log(data)).catch(error=>console.log(error))
     }
 
 
     return(
       
         <div>
-            {
-        //     <div class="container-fluid bg-dark mb-30 py-2">
-        //         <div class="row px-xl-5 mx-1">
-        //                 <div class="input-group">
-        //                     <input type="text" onChange={(event)=>{searchForProduct(event.target.value)}} class="form-control" placeholder="Search for products" />
-        //                     <div class="input-group-append">
-        //                         <span class="input-group-text bg-transparent text-primary">
-        //                             <i class="fa fa-search"></i>
-        //                         </span>
-        //                     </div>
-        //                 </div>
-                       
-        //         </div>
-                  
-        //     </div>
-
-            }
         <Navbar dark color="dark mb-5">
             <Nav className="w-100 row">
                 <FormGroup className="w-100 input-group">
-                <Input type="select" className="mx-md-1 bg-primary"  style={{maxWidth:"50px"}}>
-                    <option selected>All</option>
-                    <option>Category One</option>
-                    <option>Category Two</option>
+                <Input id="category" onChange={()=>goToCategory()} type="select" className="bg-primary mx-md-1" style={{maxWidth:"50px"}} >
+                                        <option value="home"  disabled selected > ALL </option>
+                                        {
+                                            categories.map((category,index)=>(
+                                                <option className="px-1" key={index} id={category.id}  value={category.id}  >{category.name}</option>
+                                            ))
+                                        }
+                                        
                 </Input>
                 <Input type="text" className="form-control" placeholder="Multishop | Search for products" onChange={(event)=>{searchForProduct(event.target.value)}} />
                 <div class="input-group-append">
@@ -133,19 +141,24 @@ const AllProducts=()=>{
                 </div>
                 </div>
 
-            <div class="col-md-7">
+            <div class="col-md-7" >
 
 
-                    <InfiniteScroll
-                        dataLength={page.totalElements}
+                   <Container id="scrollDiv">
+                   <InfiniteScroll
+                       dataLength={(page.products.length)}
+                       pullDownToRefreshThreshold={50}
                         hasMore={!page.lastPage}
-                        next={()=>{setCurrentPage(currentPage+1)}}
-                        endMessage={    <p style={{ textAlign: 'center' }}>...no more products...</p>    }
+                        next={()=>setCurrentPage(currentPage+1)}
+                        endMessage={   <Container className="text-center"> <p >...no more products...</p></Container>    }
                         className="row"
                         
+                        
                     >
-                    {page.products.map(product=>(<Product key={product.id} props={[product,myfun]}  />))}
+                    {page.products.map((product,i)=>(<Product key={i} props={[product,myfun]}  />))}
                     </InfiniteScroll>
+                   </Container>
+                    
                
             </div>
         </div>

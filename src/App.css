@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -207,4 +208,33 @@ a{
 
 .myHover{
   cursor: pointer;
+}
+
+.carousel-caption{
+  background: none !important;
+}
+
+/* status */
+.status-td{
+  width: 37px;
+}
+.status-circle{
+  height: 35px;
+  width: 35px;
+  padding-top: 4px;
+  border: 1px solid green;
+  border-radius:50%;
+  text-align: center;
+  margin:0px;
+}
+.status-line{
+  text-align: center;
+}
+
+.status-text{
+  margin:unset;
+}
+
+.activeDiv{
+  border:1px solid;
 }

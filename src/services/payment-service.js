@@ -16,3 +16,19 @@ export const makeSelfPayment=(paymentId,recipt)=>{
         },
     }).then(response=>response.data)
 }
+
+export const getPaymentDetail=(paymentId)=>{
+    return privateAxios.post(`payment/payment/${paymentId}`).then(response=>response.data)
+}
+
+export const proceedPayment=(paymentDetail)=>{
+    return privateAxios.post(`payment/payment-details`,paymentDetail).then(response=>response.data)
+}
+
+export const requestOrderPayment=(orderId)=>{
+    return privateAxios.post(`payment/order/${orderId}`).then(response=>response.data)
+}
+
+export const requestAppintmentPayment=(appointmentId)=>{
+    return privateAxios.post(`payment/appointment/${appointmentId}`).then(response=>response.data)
+}

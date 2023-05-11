@@ -10,8 +10,8 @@ const Footer=()=>{
             <h5 className="text-secondary text-uppercase mb-4">Get In Touch</h5>
                 <p className="mb-4">HomeoRx | Online Doctor Consultancy and Medicine</p>
                 <p className="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>HomeoRx (Divine Health Care), Wazirabad, Sector 52, Gurgaon, Haryana, 122003</p>
-                <p className="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>ermaanish@gmail.com</p>
-                <p className="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+91 9213759146</p>
+                <p className="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@homeorx.in</p>
+                <p className="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+91 8929248031</p>
             </div>
             <div className="col-lg-8 col-md-12">
                 <div className="row">
@@ -48,9 +48,9 @@ const Footer=()=>{
                             <NavItem style={{listStyle:"none"}} className="mb-2" >
                                 <NavLink to={"/home/0"} className="text-secondary"><i class="fa fa-angle-right mr-2"></i>Our Products</NavLink>
                             </NavItem>
-                            <NavItem style={{listStyle:"none"}}>
+                            {/* <NavItem style={{listStyle:"none"}}>
                                 <NavLink to={"/doctor-registration"} className="text-secondary mb-2"><i class="fa fa-angle-right mr-2"></i>Doctor Registration</NavLink>
-                            </NavItem>
+                            </NavItem> */}
                             <NavItem style={{listStyle:"none"}}>
                                 <NavLink to={"/contactus"} className="text-secondary mb-2"><i class="fa fa-angle-right mr-2"></i>Contact Us</NavLink>
                             </NavItem>

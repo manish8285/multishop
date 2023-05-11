@@ -1,9 +1,11 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import Base from "../components/Base"
 import { sendEmail } from "../services/email_service"
 
 const ContactUs=()=>{
+    let navigate = useNavigate()
     const [email,setEmail] = useState({
         from_name:"",
         from_email:"",
@@ -47,10 +49,12 @@ const ContactUs=()=>{
             </div>
 
             <div className="container-fluid">
-        <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4"><span className="bg-secondary pr-3">Contact Us</span></h2>
+        <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4"><span className="bg-secondary pr-3">Divine Health Care</span></h2>
         <div className="row px-xl-5">
             <div className="col-lg-7 mb-5">
+
                 <div className="contact-form bg-light p-30">
+                    <h1>Contact Us</h1>
                     <div id="success"></div>
                     <form name="sentMessage" id="contactForm" novalidate="novalidate">
                         <div className="control-group">
@@ -88,9 +92,54 @@ const ContactUs=()=>{
                     frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                 </div>
                 <div class="bg-light p-30 mb-3">
-                    <p className="mb-2"><i className="fa fa-map-marker-alt text-primary mr-3"></i>HomeoRx (Divine Health Care), Wazirabad, Sector 52, Gurgaon, Haryana 122003</p>
-                    <p className="mb-2"><i className="fa fa-envelope text-primary mr-3"></i>ermaanish@gmail.com</p>
-                    <p className="mb-2"><i className="fa fa-phone-alt text-primary mr-3"></i>+91 8587823264</p>
+                    <p className="mb-2"><i className="fa fa-map-marker-alt text-primary mr-3"></i>Divine Health Care, Wazirabad, Sector 52, Gurgaon, Haryana 122003</p>
+                    <p className="mb-2"><i className="fa fa-user text-primary mr-3"></i>Dr. Sweta</p>
+                    <p className="mb-2"><i className="fa fa-envelope text-primary mr-3"></i>help@homeorx.in</p>
+                    <p className="mb-2"><i className="fa fa-phone-alt text-primary mr-3"></i>+91 8929248031</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 className="section-title position-relative text-uppercase mx-xl-5 mb-4"><span className="bg-secondary pr-3"> HOMEO CLINIC</span></h2>
+        <div className="row px-xl-5">
+            <div className="col-lg-7 mb-5">
+                <div className="contact-form bg-light p-30">
+                <div id="header-carousel" class="carousel slide carousel-fade mb-30 mb-lg-0" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#header-carousel" data-slide-to="1"></li>
+                        <li data-target="#header-carousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item position-relative active" style={{height: "430px"}}>
+                            <img class="position-absolute w-100 h-100" src="img/homeoClinic.jpg" style={{objectFit:"fill"}} />
+                            
+                        </div>
+                        <div class="carousel-item position-relative" style={{height: "430px"}}>
+                            <img class="position-absolute w-100 h-100" src="img/oldage.webp" style={{objectFit: "fill"}} />
+                            
+                        </div>
+                        <div class="carousel-item position-relative" style={{height: "430px"}}>
+                            <img class="position-absolute w-100 h-100" src="img/vitiligo.png" style={{objectFit: "fill"}} />
+                            
+                        </div>
+                    </div>
+                </div>
+                <a class="btn btn-warning py-2 px-4 mt-3 animate__animated animate__fadeInUp" onClick={()=>navigate("/aboutus")} >Book Appointment</a>
+                                
+                </div>
+            </div>
+            <div className="col-lg-5 mb-5">
+                <div className="bg-light p-30 mb-30">
+                    <iframe style={{width: "100%", height: "250px",border:"0"}}
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.5517531798523!2d77.08676753524517!3d28.432779399809167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1965047e47fb%3A0xf2faeb38701a2c00!2sHOMOEOPATHIC%20CLINIC!5e0!3m2!1sen!2sin!4v1678536707773!5m2!1sen!2sin"
+                    frameborder="0" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                </div>
+                <div class="bg-light p-30 pb-3">
+                    <p className="mb-2"><i className="fa fa-map-marker-alt text-primary mr-3"></i>Homeo Clinic, Wazirabad, Sector 52, Gurgaon, Haryana 122003</p>
+                    <p className="mb-2"><i className="fa fa-user text-primary mr-3"></i>Dr DK Singh</p>
+                    <p className="mb-2"><i className="fa fa-envelope text-primary mr-3"></i>info@homeorx.in</p>
+                    <p className="mb-2"><i className="fa fa-phone-alt text-primary mr-3"></i>+91 9213759146</p>
                 </div>
             </div>
         </div>

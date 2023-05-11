@@ -10,8 +10,9 @@ export const updateLocalUser=(user)=>{
   localStorage.setItem("data",JSON.stringify(data))
 }
 
-export const signUp=(user)=>{
-  return  myAxios.post("auth/signup",user).then((response)=>response.data);
+export const signUp=(user,otp)=>{
+  console.log(otp)
+  return  myAxios.post(`auth/signup/${otp}`,user).then((response)=>response.data);
 }
 
 export const login=(loginDetail)=>{
@@ -21,6 +22,12 @@ export const login=(loginDetail)=>{
 export const sendOTP=(email)=>{
   return myAxios.get(`auth/sendOTP/${email}`).then((response)=>response.data);
 }
+
+export const sendMobileOTP=(mobileNo)=>{
+  return myAxios.get(`auth/send_mobile_otp/${mobileNo}`).then((response)=>response.data);
+}
+
+//verify user name is unique (mobileno)
 export const verifyEmailUnique=(email)=>{
   return myAxios.get(`auth/checkEmail?email=${email}`).then((response)=>response.data);
 }
@@ -28,8 +35,8 @@ export const verifyEmailUnique=(email)=>{
 export const verifyOTP=(otp)=>{
   return myAxios.get(`auth/verifyOTP/${otp}`).then((response)=>response.data);
 }
-export const resetPassword=(email,password,otp)=>{
-  return myAxios.post(`auth/resetPassword?email=${email}&password=${password}&otp=${otp}`).then((response)=>response.data);
+export const resetPassword=(mobile,password,otp)=>{
+  return myAxios.post(`auth/resetPassword?mobile=${mobile}&password=${password}&otp=${otp}`).then((response)=>response.data);
 }
 
 export const getCustomer=()=>{

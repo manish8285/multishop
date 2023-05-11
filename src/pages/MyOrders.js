@@ -3,7 +3,7 @@ import InfiniteScroll from "react-infinite-scroll-component"
 import { useNavigate } from "react-router-dom"
 import { Card, CardBody, CardHeader, CardText, CardTitle, Col, Container, NavLink } from "reactstrap"
 import Base from "../components/Base"
-import { DRIVE_IMAGE_URL } from "../services/helper"
+import { BASE_URL, DRIVE_IMAGE_URL } from "../services/helper"
 import { GetMyOrders } from "../services/order-service"
 
 const MyOrders=()=>{
@@ -55,7 +55,7 @@ const MyOrders=()=>{
             
         </div>
                            <InfiniteScroll
-                           dataLength={page.totalElements}
+                           dataLength={page.orders.length}
                            hasMore={!page.lastPage}
                            next={()=>{setCurrentPage(currentPage+1)}}
                            endMessage={    <h1 style={{ textAlign: 'center' }}>...End of Page...</h1>    }
@@ -64,8 +64,8 @@ const MyOrders=()=>{
             {
                 
                 page.orders.map((order,index)=>(
-                    <Card className="mt-2" key={index}>
-                   <CardHeader className="myHover" onClick={()=>{navigate("/order-detail/"+order.orderId)}} >
+                    <Card className="mt-2" key={index} color={order.paymentVerified ? 'success': 'light'} outline >
+                   <CardHeader style={{background:"none"}} className="myHover" onClick={()=>{navigate("/order-detail/"+order.orderId)}} >
                    <i class="fas fa-gifts"></i> <b className="mr-3">{order.orderId}</b> <i class="fas fa-rupee-sign"> <b className="mr-3">{order.amount}</b></i> <i class="fas fa-calendar-check"> <b> {order.date.substring(0,10)}</b></i>   <p className="float-right"><i class="fas fa-check-circle"></i> Status : <b >{order.status[order.status?.length-1]?.status} </b> </p>
                    </CardHeader>
                    <CardBody>
@@ -74,8 +74,14 @@ const MyOrders=()=>{
 
                            <div className="row" style={{flexWrap:"unset"}}>
                                 <Col  sm="3" style={{width:"auto"}} >
+                                    {
+                                        (order.ordertype != null && order.ordertype=="PRESCRIPTION") &&(<img className="mb-1" width={"90px"} src={BASE_URL+"images/orders/"+order?.prescription} alt="product image" />)
+                                    }
                                    
-                                    <img className="mb-1" width={"90px"} src={DRIVE_IMAGE_URL+order?.items[0]?.product.images[0].name} alt="product image" />
+                                   {
+                                        (order.ordertype !="PRESCRIPTION") &&(<img className="mb-1" width={"90px"} src={DRIVE_IMAGE_URL+order?.items[0]?.product.images[0].name} alt="product image" />)
+                                    }
+                                    
 
                                 </Col>
 

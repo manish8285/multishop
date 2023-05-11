@@ -31,6 +31,11 @@ import Doctors from './pages/Doctors';
 import Appointment from './pages/Appointment';
 import MyAppointments from './pages/MyAppointments';
 import PayMenually from './pages/PayMenually';
+import PaymentResponse from './pages/PaymentResponse';
+import Consultation from './pages/Consultation';
+import Patients from './pages/Patients';
+import Prescriptions from './pages/Prescriptions';
+import Store from './pages/Store';
 
 function App() {
   return (
@@ -52,13 +57,18 @@ function App() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/test' element={<Testpage />} />
         <Route path='/contactus' element={<ContactUs />} />
-        <Route path='/aboutus' element={<AboutUs />} />
+        <Route path='/aboutus' element={<Store />} />
         <Route path='/privacy-policy' element={<PrivacyPolicy />} />
         <Route path='/return-policy' element={<ReturnPolicy />} />
         <Route path='/doctor-registration' element={<DoctorRegistration />} />
         <Route path='/doctors' element={<Doctors />} />
+        <Route path='/patients' element={<Patients />} />
+        <Route path='/store' element={<Store />} />
+        <Route path='/prescriptions' element={<Prescriptions />} />
+        <Route path='/consultation' element={<Consultation />} />
         <Route path='/self_payment/:paymentID' element={<PayMenually />} />
         <Route path='/appointment/:drId' element={<Appointment />} />
+        <Route path='/payment_response/:paymentId' element={<PaymentResponse />} />
         <Route path='/order-detail/:orderId' element={<OrderDetail />} />
       </Routes>
     </HashRouter>

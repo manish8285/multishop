@@ -18,6 +18,8 @@ const PayMenually=()=>{
 
     const [recipt,setRecipt]=useState()
 
+    
+
     useEffect(()=>{
         console.log("payment id ="+paymentID)
         getSelfPayment(paymentID).then(data=>{

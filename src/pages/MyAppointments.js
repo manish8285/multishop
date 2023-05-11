@@ -40,12 +40,12 @@ const MyAppointments=()=>{
         <Base>
         <Container>
             <Card className="p-1 my-1 d-flex">
-            <i class="fas fa-headset text-primary mx-2"> My Appointments <Button onClick={()=>navigate("/doctors")} className="btn-success">Book New</Button></i> 
+            <i class="fas fa-headset text-primary mx-2"> My Appointments <Button onClick={()=>navigate("/consultation")} className="btn-success">Book New</Button></i> 
             
             </Card>
 
             <InfiniteScroll
-                        dataLength={pageData.totalElements}
+                        dataLength={pageData.appointments.length}
                         hasMore={!pageData.lastPage}
                         next={()=>{setCurrentPage(currentPage+1)}}
                         
@@ -61,33 +61,53 @@ const MyAppointments=()=>{
                                                 <i class="fas fa-user-injured fa-2x text-primary"></i>
                                                 <i class="fas fa-headset fa-2x text-primary mx-2"></i>
                                                 <i class="fas fa-user-md fa-2x text-primary"></i>
-                                                <h5 className="text-success">Dr. {ap.doctor?.name}</h5>
+                                                {/* <h5 className="text-success">Dr. {ap.doctor?.name}</h5> */}
                                             </Container>
-                                            <Button onClick={()=>navigate("/self_payment/"+ap?.selfPayment?.id)} >{ap.status}</Button>
-                                            {(ap.status=="WAITING FOR PAYMENT") && (<Button onClick={()=>navigate("/self_payment/"+ap?.selfPayment?.id)} className="ml-1 btn-success">PAY ₹ {ap.fee}</Button>)}
+                                            {/* <Button onClick={()=>navigate("/self_payment/"+ap?.selfPayment?.id)} >Pay</Button> */}
+                                            { !(ap.paymentVerified) && (<Button  className="ml-1 btn-warning">PAY ₹ {ap.fee}</Button>)}
+                                            {(ap.paymentVerified) && (<Button disabled className="ml-1 btn-success">PAYMENT DONE</Button>)}
                                             <div>
                                             <table className="table-responsive">
                                                 <tbody>
-                                                    <tr>
-                                                        <td>Date</td>
-                                                        <td>{ap.date}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Pt. Name</td>
-                                                        <td>{ap.name}</td>
-                                                    </tr>
-                                                    <tr>
+                                                <tr>
+                                                        <td>Name</td>
+                                                        <td>{ap.patient.name}</td>
+                                                </tr>
+                                                <tr>
+                                                        <td>Age</td>
+                                                        <td>{ap.patient.age}</td>
+                                                </tr>
+                                                <tr>
                                                         <td>Mobile : </td>
                                                         <td> {ap.mobile}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Email : </td>
-                                                        <td> {ap.email}</td>
+                                                        <td>Booking Date : </td>
+                                                        <td>{ap.date}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Symptoms : </td>
                                                         <td> {ap.symptoms}</td>
                                                     </tr>
+                                                    <tr>
+                                                        <td>Medium : </td>
+                                                        <td> {ap.type}</td>
+                                                    </tr>
+                                                    {
+                                                        (ap.scheduleTime !=null) &&(<tr>
+                                                            <td>Schedule Time : </td>
+                                                            <td> {ap.scheduleTime}</td>
+                                                        </tr>)
+                                                    }
+                                                    
+                                                    {
+                                                        (ap.invitationLink != null) &&(<tr>
+                                                        
+                                                            <td colSpan={2}><Button onClick={()=>window.location.href=ap.invitationLink} className="btn-success">JOIN Meeting</Button> </td>
+                                                            
+                                                        </tr>)
+                                                    }
+                                                    
                                                 </tbody>
                                             </table>
                                             </div>

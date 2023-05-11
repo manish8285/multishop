@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
 import { useNavigate } from "react-router-dom"
-import { Button, Card, CardBody, CardFooter, Col, Container, Form, FormGroup, Input, Table } from "reactstrap"
+import { Button, Card, CardBody, CardFooter, CardText, Col, Container, Form, FormGroup, Input, Row, Table } from "reactstrap"
 import { isLogedIn } from "../auth"
 import Base from "../components/Base"
 import { getAllDoctors, getAllSpecializations } from "../services/doctor-service"
@@ -67,6 +67,29 @@ const Doctors=()=>{
     return (
         <Base>
             <Container>
+                <Card>
+                    <CardBody>
+                        <CardText className=" text-primary" tag="h5">Online doctor consultation with qualified doctors</CardText>
+                        <p style={{color:"gray"}}>Starting at ₹199</p>
+
+                        <Row>
+                            <Col md="3">
+                            <i class="far fa-clock"> Talk Within 1 hr</i>
+
+                            </Col>
+                            <Col md="3">
+                            <i class="far fa-comment-alt"> Free Follow upto 3 days</i>
+                            </Col>
+                            <Col md="3">
+                            <i class="far fa-file-powerpoint"> Get a valid prescription</i>
+                            </Col>
+                            <Col md="3">
+                            <i class="far fa-percent"> Refund after starting treatment</i>
+                            </Col>
+                        </Row>
+                    </CardBody>
+                </Card>
+
                 <Form className="my-2 mx-0 px-0">
                     <FormGroup >
                     <Input type="select" onChange={(event)=>setCategory(event.target.value)} className="form-control" >
@@ -81,7 +104,7 @@ const Doctors=()=>{
                 </Form>
 
                 <InfiniteScroll
-                        dataLength={pageData.totalElements}
+                        dataLength={pageData.doctors.length}
                         hasMore={!pageData.lastPage}
                         next={()=>{setCurrentPage(currentPage+1)}}
                         className="row"
@@ -98,8 +121,8 @@ const Doctors=()=>{
                                 <p className="text-primary">{dr.specialization.name} {!(dr.verified) &&(<i class='fas fa-check-circle' style={{color:"blue"}}></i>)} </p>
                                
                                 </Container>
-                                <CardFooter>
-                                    <table>
+                                <CardFooter style={{background:"none"}}>
+                                    <table >
                                         <tbody>
                                             <tr>
                                                 <td>Qualification :</td>
@@ -113,7 +136,7 @@ const Doctors=()=>{
                                     </table>
                                 </CardFooter>
                                 <Container className="text-center">
-                                <Button onClick={()=>navigate("/appointment/"+dr.id)} className="btn-success mt-1">Book Appointment</Button>
+                                <Button onClick={()=>navigate("/appointment/"+dr.id)} className="btn-success mt-1">Start Consultation</Button>
                                 </Container>
                             </CardBody>
                         </Card>

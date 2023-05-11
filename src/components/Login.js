@@ -10,7 +10,7 @@ const Login=()=>{
     let navigate = useNavigate()
 
     const [logindata,setlogindata] =useState({
-        "email":"",
+        "username":"",
         "password":""
     })
     const [errors,setErrors]=useState({})
@@ -26,12 +26,19 @@ const Login=()=>{
         })
     }
 
-    const attemptLogin=()=>{
-        const authRequest= {
-            "username":logindata.email,
-            "password":logindata.password
+    const checkMobile=()=>{
+        if(logindata.username.length==10){
+            setErrors({...errors,username:null})
+        }else{
+            setErrors({...errors,username:"Invalid Mobile Number"})
         }
-        login(authRequest).then((data)=>{
+    }
+    const attemptLogin=()=>{
+        // const authRequest= {
+        //     "username":logindata.email,
+        //     "password":logindata.password
+        // }
+        login(logindata).then((data)=>{
             doLogin(data,()=>{
                 toast.success("You have logged in successfully !!!")
                 navigate("/")
@@ -50,20 +57,18 @@ const Login=()=>{
 
 
     return (
-
-
                     <div className="card mt-2">
                         <div className="card-body">
                             <Container className="text-center">
-                            <h4 className="text-primary">HomeoRx | LOGIN</h4>
+                            <h4 className="text-primary myHover" onClick={()=>navigate("/")}>HomeoRx | LOGIN</h4>
                             </Container>
                         <Form className="">
                         <FormFeedback invalid>
                                 {JSON.stringify(logindata.error)}
                             </FormFeedback>
                             <FormGroup>
-                            <Label>Enter you username</Label>
-                            <Input invalid={errors?.username} type="email" name="email" required id="email" placeholder="Enter your email" value={logindata.email} onChange={(event)=>updateLoginData(event)} />
+                            <Label>Enter your mobile number</Label>
+                            <Input invalid={errors?.username} type="number" name="username" required id="username" placeholder="Registered mobile number" onBlur={()=>checkMobile()} value={logindata.username} onChange={(event)=>updateLoginData(event)} />
                             
                             <FormFeedback>
                                 {errors?.username}
@@ -79,7 +84,7 @@ const Login=()=>{
                             <a onClick={()=>{navigate("/forget-password")}} >Forget Password ?</a>
                             </FormGroup>
                             <Container className="text-center">
-                            <Button onClick={()=>attemptLogin()} >Login</Button>
+                            <button className="btn btn-primary" type="button" onClick={()=>attemptLogin()} >Login</button>
                             </Container>
                             <a className="text-dark" onClick={()=>{navigate("/signup")}} >New member? Signup</a>
                             </Form>

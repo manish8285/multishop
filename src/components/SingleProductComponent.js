@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
-import { Table } from "reactstrap"
+import { Form, Input, Table } from "reactstrap"
 import { AddToCart, GetCart, SubstractFromCart } from "../services/cart-service"
 import { BASE_URL, DRIVE_IMAGE_URL } from "../services/helper"
+import { CalculateShippingCharge } from "../services/order-service"
 import { GetProductById } from "../services/product-service"
 
 
@@ -14,6 +15,23 @@ const SingleProductComponent=()=>{
     let navigate = useNavigate()
     const [mycart,setMycart] = useState(GetCart)
     const [added_to_card,setAdded_to_cart] = useState(false)
+    const [del,setDel] = useState({
+        etd:""
+    })
+
+    const [pincode,setPincode] = useState(122003)
+
+
+    const calculateDeliveryCharge=()=>{
+        if(pincode.length==6)
+        CalculateShippingCharge(pincode).then(data=>{
+            setDel(data)
+        }).catch(error=>console.log(error))
+    }
+
+    useEffect(()=>{
+        calculateDeliveryCharge()
+    },[pincode])
 
     window.addEventListener('cart',()=>{setMycart(GetCart)})
 
@@ -27,7 +45,13 @@ const SingleProductComponent=()=>{
     }
     useEffect(()=>{
         fetchProduct(productId)
+        //calculateDeliveryCharge()
+        CalculateShippingCharge(122003).then(data=>{
+            setDel(data)
+        }).catch(error=>console.log(error))
     },[])
+
+    
 
     return(
         <>
@@ -55,9 +79,17 @@ const SingleProductComponent=()=>{
                     </div>
                     <h3>Rs {product.price}</h3><h6 class="text-muted ml-2"><del>Rs {product.mrp}</del></h6>
                     <p class="mb-4">{product.description?.substring(0,50)}</p>
-                  
+                    <div className="d-flex">
+                    <p><i class="fas fa-map-marker-alt"> </i>  </p>
+                    <Form>
+                        <Input style={{margin:"0px 2px 0px 2px",padding:"2px",fontSize:"12px",height:"22px",width:"60px"}} value={pincode} onChange={(event)=>setPincode(event.target.value)} type="text" />
+                    </Form>
+                    <p className="text-success">Expected Delivery {del.etd}</p>
+                    </div>
                 
-                    <div class="d-flex align-items-center mb-4 pt-2">
+                    {
+                        (product.quantity>0) &&(
+                            <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style={{width: "130px"}}>
                             <div class="input-group-btn">
                                 <button onClick={()=>{SubstractFromCart(product.id);toast.warning("Substracted from cart -1")}} class="btn btn-primary btn-minus">
@@ -80,6 +112,18 @@ const SingleProductComponent=()=>{
                             Cart</button>)
                         }
                     </div>
+                        )
+                    }
+                    
+                    {
+                        (product.quantity<=0) &&(
+                            <div class="d-flex align-items-center mb-4 pt-2">
+                            <button disabled class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Out Of Stock</button>
+                            </div>
+                        )
+                    }
+
+                   
                     <div class="d-flex pt-2">
                         <strong class="text-dark mr-2">Share on:</strong>
                         <div class="d-inline-flex">
@@ -103,6 +147,10 @@ const SingleProductComponent=()=>{
                             <tr>
                                 <th>Product Name</th>
                                 <td>{product.name}</td>
+                            </tr>
+                            <tr>
+                                <th>Potency</th>
+                                <td>{product.potency}</td>
                             </tr>
                             <tr>
                                 <th>Category</th>
@@ -132,10 +180,14 @@ const SingleProductComponent=()=>{
                                 <th>Size</th>
                                 <td>{product.size}</td>
                             </tr>
-                            <tr>
+                             <tr>
+                                <th>Weight</th>
+                                <td>{product.weight}</td>
+                            </tr>
+                            {/* <tr>
                                 <th>Available Units</th>
                                 <td>{product.quantity}</td>
-                            </tr>
+                            </tr> */}
                         </tbody>
                     </Table>
                 </div>

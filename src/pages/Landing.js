@@ -6,9 +6,15 @@ import OwlCarousel from 'react-owl-carousel';
 import { useEffect, useState } from "react";
 import { getAllCategories } from "../services/product-service";
 import Footer from "../components/Footer";
+import PrescriptionOrder from "../components/PrescriptionOrder";
 
-const Landing=()=>{
+const Landing=({props})=>{
     let navigate =useNavigate()
+    const [modal, setModal] = useState(false);
+    
+    const toggle = () => setModal(!modal);
+
+    
 
     const [categories,setCategories]=useState([])
 
@@ -38,18 +44,23 @@ const Landing=()=>{
         responsive: {
             0: {
                 items: 1,
+                loop:true
             },
             400: {
                 items: 1,
+                loop:true
             },
             600: {
                 items: 2,
+                loop:true
             },
             700: {
                 items: 3,
+                loop:true
             },
             1000: {
                 items: 5,
+                loop:true
             }
         },
       };
@@ -68,7 +79,7 @@ const Landing=()=>{
                         })
                     }
                 </Input> */}
-                <Input id="category" onChange={()=>goToCategory()} type="select" className="bg-primary mx-md-1" style={{maxWidth:"50px"}} >
+                <Input id="category" onChange={()=>goToCategory()} type="select" className="bg-primary mx-md-1 form-control" style={{maxWidth:"65px"}} >
                                         <option value="home"  disabled selected > ALL </option>
                                         {
                                             categories.map((category,index)=>(
@@ -77,7 +88,7 @@ const Landing=()=>{
                                         }
                                         
                                     </Input>
-                <Input type="text" className="form-control" id="searchBox" placeholder="Multishop | Search for products"  />
+                <Input type="text" className="form-control" id="searchBox" placeholder="HomeoRx | Search for products"  />
                 <div class="input-group-append" onClick={()=>navigate(`/home/${document.getElementById("searchBox").value}`)} >
                                  <span class="input-group-text bg-transparent text-primary">
                                     <i class="fa fa-search"></i>
@@ -99,41 +110,23 @@ const Landing=()=>{
                     </ol>
                     <div class="carousel-inner">
                         <div class="carousel-item position-relative active" style={{height: "430px"}}>
-                            <img class="position-absolute w-100 h-100" src="img/Personal_Care.webp" style={{objectFit:"cover"}} />
-                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style={{"max-width":"700px;"}}>
-                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Beauti Products</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Buy Homoeopathic natural personal care products</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" onClick={()=>navigate("/home/facewash")} >Shop Now</a>
-                                </div>
-                            </div>
+                            <img class="position-absolute w-100 h-100" src="img/kidneyStone.jpg" style={{objectFit:"fill"}} />
+                            
                         </div>
                         <div class="carousel-item position-relative" style={{height: "430px"}}>
-                            <img class="position-absolute w-100 h-100" src="img/pain_killer.webp" style={{objectFit: "cover"}} />
-                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center" >
-                                <div class="p-3" style={{maxWidth: "700px"}}>
-                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Pain Killer</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Buy Most Effective Homoeopathic Pain killer Oil and Medicine</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" onClick={()=>navigate("/home/pain")}>Shop Now</a>
-                                </div>
-                            </div>
+                            <img class="position-absolute w-100 h-100" src="img/oldage.webp" style={{objectFit: "fill"}} />
+                            
                         </div>
                         <div class="carousel-item position-relative" style={{height: "430px"}}>
-                            <img class="position-absolute w-100 h-100" src="img/cream_adven.webp" style={{objectFit: "cover"}} />
-                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <div class="p-3" style={{maxWidth: "700px"}}>
-                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Multipurpose Cream</h1>
-                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Goodness of Homoeopathic that provide healthy skin and Natural Glow</p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" onClick={()=>navigate("/home/cream")}>Shop Now</a>
-                                </div>
-                            </div>
+                            <img class="position-absolute w-100 h-100" src="img/vitiligo.png" style={{objectFit: "fill"}} />
+                            
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="product-offer mb-30" style={{height: "200px"}} >
-                    <img class="img-fluid" src="img/ml30.webp" alt="" />
+                    <img class="img-fluid" src="img/ml30.webp" alt="" style={{objectFit:"cover"}} />
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">Save 20%</h6>
                         <h3 class="text-white mb-3">All Homoeopathic Medicine</h3>
@@ -141,11 +134,11 @@ const Landing=()=>{
                     </div>
                 </div>
                 <div class="product-offer mb-30" style={{height: "200px"}}>
-                    <img class="img-fluid" src="img/dropper.jpg" alt="" />
+                    <img class="img-fluid" src="img/prescription.png" alt="" style={{objectFit:"fill"}} />
                     <div class="offer-text">
                         <h6 class="text-white text-uppercase">Save 50%</h6>
-                        <h3 class="text-white mb-3">All Loose Medicine</h3>
-                        <a onClick={()=>navigate("/home/0")} class="btn btn-primary">Shop Now</a>
+                        <h3 class="text-white mb-3">Buy Remedies</h3>
+                        <a onClick={()=>toggle()} class="btn btn-primary"> <i class="fas fa-camera text-dark"></i> Upload Prescription</a>
                     </div>
                 </div>
             </div>
@@ -191,11 +184,11 @@ const Landing=()=>{
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <a class="text-decoration-none" onClick={()=>navigate("/category/1")} >
                     <div class="cat-item d-flex align-items-center mb-4">
-                        <div class="overflow-hidden" style={{width: "100px", height: "100px"}}>
-                            <img class="img-fluid" src="img/aconite30.webp" alt="" />
+                        <div class="overflow-hidden p-2" style={{width: "100px", height: "100px"}}>
+                            <img class="img-fluid"  src="img/aquiplusfacewash.jpg" alt="" />
                         </div>
                         <div  class="flex-fill pl-3">
-                            <h6>30 ml Liquid</h6>
+                            <h6>Beauti Products</h6>
                             <small class="text-body">100 Products</small>
                         </div>
                     </div>
@@ -204,34 +197,34 @@ const Landing=()=>{
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <a class="text-decoration-none" onClick={()=>{navigate("/home/Reckweg")}}>
                     <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                        <div class="overflow-hidden" style={{width: "100px", height: "100px"}}>
-                            <img class="img-fluid" src="img/r18.webp" alt="" />
+                        <div class="overflow-hidden p-2" style={{width: "100px", height: "100px"}}>
+                            <img class="img-fluid"  src="img/r18.webp" alt="" />
                         </div>
                         <div class="flex-fill pl-3">
-                            <h6>Reckweg Series R</h6>
+                            <h6>German medicine</h6>
                             <small class="text-body">100 Products</small>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
-                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
+                <a class="text-decoration-none" onClick={()=>{navigate("/home/pain")}}>
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4" >
                         <div class="overflow-hidden" style={{width: "100px", height: "100px"}}>
-                            <img class="img-fluid" src="img/bc12.webp" alt="" />
+                            <img class="img-fluid" src="img/ruckPain.webp" alt="" />
                         </div>
                         <div class="flex-fill pl-3">
-                            <h6>Bio Combination</h6>
+                            <h6>Pain Killer</h6>
                             <small class="text-body">100 Products</small>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
-                    <div class="cat-item img-zoom d-flex align-items-center mb-4">
-                        <div class="overflow-hidden" style={{width: "100px", height: "100px"}}>
-                            <img class="img-fluid" src="img/aconiteq.webp" alt="" />
+                <a class="text-decoration-none" onClick={()=>{navigate("/home/q")}}>
+                    <div class="cat-item img-zoom d-flex align-items-center mb-4" >
+                        <div class="overflow-hidden p-2" style={{width: "100px", height: "100px"}}>
+                            <img  class="img-fluid" src="img/aconiteq.webp" alt="" />
                         </div>
                         <div class="flex-fill pl-3">
                             <h6>Mother Tincture</h6>
@@ -395,6 +388,28 @@ const Landing=()=>{
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                <div class="product-item bg-light mb-4">
+                    <div class="product-img position-relative overflow-hidden text-center">
+                        <img class="img-fluid w-100" style={{maxHeight:"310px",maxWidth:"250px"}} src="img/ruckPain.webp" alt="" />
+                    </div>
+                    <div class="text-center py-4">
+                        <a class="h6 text-decoration-none text-truncate" onClick={()=>navigate("/home/pain")}>Pain Killer</a>
+                        <div class="d-flex align-items-center justify-content-center mt-2">
+                            {/* <h5>₹123.00</h5><h6 class="text-muted ml-2"><del>₹123.00</del></h6> */}
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center mb-1">
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="fa fa-star text-primary mr-1"></small>
+                            <small class="far fa-star text-primary mr-1"></small>
+                            <small class="far fa-star text-primary mr-1"></small>
+                            <small>(58)</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -406,19 +421,19 @@ const Landing=()=>{
                 <div class="product-offer mb-30" style={{height: "300px"}}>
                     <img class="img-fluid" src="img/doctor1.jpg" alt="" />
                     <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 90%</h6>
-                        <h3 class="text-white mb-3">Doctor Cosultancy at Just ₹200</h3>
-                        <a disabled onClick={()=>navigate("/doctors")} class="btn btn-primary">Contact Now</a>
+                        <h6 class="text-white text-uppercase">100% Refund after starting treatment</h6>
+                        <h3 class="text-white mb-3">Free Online Doctor Cosultancy</h3>
+                        <a disabled onClick={()=>navigate("/consultation")} class="btn btn-primary">Contact Now</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="product-offer mb-30" style={{height: "300px"}}>
-                    <img class="img-fluid" src="img/Blood-test.png" alt="" />
+                    <img class="img-fluid" src="img/homeoClinic.jpg" alt="" />
                     <div class="offer-text">
-                        <h6 class="text-white text-uppercase">Save 50%</h6>
-                        <h3 class="text-white mb-3">LAB TESTS AT HOME</h3>
-                        <a disabled href="" class="btn btn-primary">Schedule</a>
+                        <h6 class="text-white text-uppercase">Save 100% </h6>
+                        <h3 class="text-white mb-3">Free Book Appointment and visit</h3>
+                        <a disabled onClick={()=>navigate("/aboutus")} class="btn btn-primary">Schedule</a>
                     </div>
                 </div>
             </div>
@@ -453,7 +468,10 @@ const Landing=()=>{
         </OwlCarousel>
     </div>
 
+    <PrescriptionOrder props={[toggle,modal]} ></PrescriptionOrder>
             </>
+
+           
             
         </Base>
     )
