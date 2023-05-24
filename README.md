@@ -39,22 +39,11 @@ Doctor can respond on appointment , prescribe medicine, also can send medicine t
 And much more
 
 # Technical Specification
-This is a SpringBoot project that uses MySql database. This Application is back-end part of the project that follows server client architecture.
-All the sensative apis are secured using JWT based authentication.
-
-
-# Note
-The code available in this repository is not the final code. All the codes are kept private for security purpose. Code in this repository is only for sample.
+This is a ReactJS project.
 
 # Snapshots
 
-![image](https://github.com/manish8285/e-pharmacy/assets/113131864/c64d7c0b-aeab-4f1d-99d1-e2a8d2834049)
-![image](https://github.com/manish8285/e-pharmacy/assets/113131864/2fab6c94-daca-456a-9526-fbefcbcbc9fb)
-![image](https://github.com/manish8285/e-pharmacy/assets/113131864/9d393c7a-3212-4d81-a89f-a3d65b566cd8)
-![image](https://github.com/manish8285/e-pharmacy/assets/113131864/5a4c17f9-b108-45c8-b8cd-6ddcd0a01398)
-![image](https://github.com/manish8285/e-pharmacy/assets/113131864/08151c2d-a94b-48f6-ac43-195ca122486c)
-
-# Front end that has been developed by consuming this rest apis
+# Front end that has been developed by consuming rest apis
 ![image](https://github.com/manish8285/e-pharmacy/assets/113131864/e79f3b59-2747-40c5-a2ac-0f03d49803a0)
 ![image](https://github.com/manish8285/e-pharmacy/assets/113131864/41cc4340-da42-4333-8f4f-f8f2de2dac03)
 ![image](https://github.com/manish8285/e-pharmacy/assets/113131864/ab9edc36-b5f4-4677-8bfa-302e761ed567)
